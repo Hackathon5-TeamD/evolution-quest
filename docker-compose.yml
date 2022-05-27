@@ -32,12 +32,12 @@ services:
       - db
     build: ./backend
     ports:
-      - "8000:8000"
+      - "5001:8080"
     volumes:
-      - ./backend:/src/app:cached
-      - ./backend/DB:/src/db:cached
-      - ./backend/scripts:/src/scripts:cached
-    working_dir: /src/scripts
+      - ./backend:/usr/src/app:cached
+      # - ./backend/DB:/usr/src/db:cached
+      - ./backend/scripts:/usr/src:cached
+    working_dir: /usr/src
     command: bash -c "./run.sh"
     networks:
       - backend_network
