@@ -10,9 +10,12 @@ services:
     # docker内と共有するフォルダの指定
     volumes:
       - ./front/React:/front
+      # - ./front/scripts:/front
     # docker内に入った時の初期パスの指定
     working_dir: /front
     # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
+    
+    # command: bash -c "./start.sh"
     ports:
       - 3000:3000
     # コンテナが勝手に終了しないための設定
