@@ -1,3 +1,3 @@
 # evolution-quest
 ## branch
-featyre/terra
+feature/terra
