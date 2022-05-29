@@ -35,17 +35,17 @@ services:
       - db
     build: ./backend
     ports:
-      - "5001:8080"
+      - "5001:5000"
     volumes:
-      - ./backend:/usr/src/app:cached
+      - ./backend/app:/usr/src/app:cached
       # - ./backend/DB:/usr/src/db:cached
-      - ./backend/scripts:/usr/src:cached
-    working_dir: /usr/src
+      - ./backend/scripts:/usr/src/scripts:cached
+    working_dir: /usr/src/scripts
     command: bash -c "./run.sh"
     networks:
       - backend_network
     environment:
-      APP_ENV: "development"
+      # APP_ENV: "development"
       TZ: "Asia/Tokyo"
     env_file:
       - .env.dev
@@ -64,7 +64,7 @@ services:
     networks:
       - backend_network
     environment:
-      APP_ENV: "development"
+      # APP_ENV: "development"
       TZ: "Asia/Tokyo"
     env_file:
       - .env.dev

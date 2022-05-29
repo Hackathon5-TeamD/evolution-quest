@@ -5,15 +5,15 @@ RUN apt update \
     && apt install --no-install-recommends -y tzdata \
     && apt clean
 
-ADD requirements.txt .
+WORKDIR /usr/src/app
+
+ENV FLASK_APP=app
+
+COPY requirements.txt .
 
 RUN pip install --upgrade pip \
     && pip install --trusted-host pypi.python.org -r requirements.txt
 
-ENV PORT 8080
+# COPY ./app /usr/src
 
-WORKDIR /usr/src
-
-COPY ./app /usr/src
-
-CMD [ "python", "index.py" ]
+# CMD [ "python", "app.py" ]
