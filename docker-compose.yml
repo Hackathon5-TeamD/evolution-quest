@@ -1,0 +1,96 @@
+# docker composerのバージョンの指定
+version: "3.9"
+
+services:
+  node:
+    # buildするdockerfileの位置
+    build: ./front
+    # 作成するdockerコンテナの名前
+    container_name: node
+    # docker内と共有するフォルダの指定
+    volumes:
+      - ./front/React:/front
+      # - ./front/scripts:/front
+    # docker内に入った時の初期パスの指定
+    working_dir: /front
+    # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
+    
+    # command: bash -c "./start.sh"
+    ports:
+      - 3000:3000
+    # コンテナが勝手に終了しないための設定
+    tty: true
+    # 標準入出力とエラー出力をコンテナに結びつける設定
+    stdin_open: true
+    # ホットリロードを行う設定
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - front_network
+
+
+  flask:
+    container_name: flask
+    depends_on:
+      - db
+    build: ./backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./backend/app:/usr/src/app:cached
+      # - ./backend/DB:/usr/src/db:cached
+      - ./backend/scripts:/usr/src/scripts:cached
+    working_dir: /usr/src/scripts
+    command: bash -c "./run.sh"
+    networks:
+      - backend_network
+    environment:
+      # APP_ENV: "development"
+      TZ: "Asia/Tokyo"
+    env_file:
+      - .env.dev
+      
+  db:
+    container_name: mysql_db
+    build: ./backend/DB
+    restart: always
+    tty: true
+    expose:
+      - "3306"
+    volumes:
+      - ./backend/DB/conf.d:/etc/mysql/conf.d:cached
+      - ./backend/DB/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+      - ./log/db:/var/log/mysql:cached
+    networks:
+      - backend_network
+    environment:
+      # APP_ENV: "development"
+      TZ: "Asia/Tokyo"
+    env_file:
+      - .env.dev
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    env_file:
+      - .env.dev
+    links:
+      - db
+    ports:
+      - "4000:80"
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
+    networks:
+      - backend_network
+
+networks:
+  # default:
+  #   external:
+  #     name: bridge
+  backend_network:
+    name: backend_network
+    driver: bridge
+    # external: true
+  front_network:
+    name: front_network
+    driver: bridge
+    # external: true
