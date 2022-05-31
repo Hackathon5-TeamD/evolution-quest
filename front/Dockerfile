@@ -14,4 +14,4 @@ EXPOSE 3000
 # コンテナが勝手に終了してしまわないようにする設定
 ENV CI=true
 
-CMD npm start
+CMD npm install && npm start
