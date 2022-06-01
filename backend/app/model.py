@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + \
     os.path.join(base_dir, 'data.sqlite')
 
-# 使用しない機能と思うためオフまた、明示的にオフしておかないとエラーが出ることがある
+# 使用しない機能と思うため,また明示的にオフしておかないとエラーが出ることがある
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
