@@ -1,7 +1,7 @@
 # evolution-quest
 
 ## db作成
-`pyshon3` or `pyshon`
+`python3` or `python`
 Python対話モードとなったら
 ```python
 >>> from app import db
