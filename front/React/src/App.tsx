@@ -1,10 +1,10 @@
 import "./App.css";
-import { Login } from "./components/Login";
+import { Router } from "./router/Router";
 
 export default function App() {
   return (
     <div className="App">
-      <Login />
+      <Router />;
     </div>
   );
 }
