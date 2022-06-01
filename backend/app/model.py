@@ -1,8 +1,6 @@
-from lib2to3.pgen2.pgen import generate_grammar
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 
 base_dir = os.path.dirname(__file__)
 
@@ -39,4 +37,4 @@ class Result(db.model):
     user_id = db.Column(db.Integer)
     accuracy_value = db.Column(db.integer)
     wpm = db.Column(db.integer)
-    playd_at_date = db.Column(db.datetime)
+    playd_at_date = db.Column(db.DateTime)
