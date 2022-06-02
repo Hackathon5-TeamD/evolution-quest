@@ -45,3 +45,10 @@ git branch -D feature/#number
 
 # 以降繰り返し
 ```
+
+### Git キャッシュ全消し
+.gitignoreしたあとに
+
+```bash
+git rm -r --cached .
+```
