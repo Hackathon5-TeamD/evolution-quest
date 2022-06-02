@@ -1,1 +1,6 @@
 /app/venv
+
+# pycache関連ディレクトリとファイル
+__pycache__/
+*.py[cod]
+*$py.class
