@@ -49,6 +49,8 @@ services:
       TZ: "Asia/Tokyo"
     env_file:
       - .env.dev
+    # コンテナが勝手に終了しないための設定
+    tty: true
       
   db:
     container_name: mysql_db
