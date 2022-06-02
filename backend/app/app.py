@@ -15,3 +15,6 @@ def index():
 app.register_blueprint(user_module)
 app.register_blueprint(terminologie_module)
 app.register_blueprint(result_module)
+
+if __name__ == '__main__':
+    app.run()
