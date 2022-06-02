@@ -1,8 +1,4 @@
 import os
-import sys
-
-sys.path.append("/Users/nishiuraharu/.pyenv/versions/3.9.7/lib/python3.9/site-packages")
-
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
