@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="nav">
+        <li><a href="{{url_for('app.home')}}">ホーム</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('app.logout')}}">ログアウト</a></li>
+        {% else %}
+        <li><a href="{{url_for('app.login')}}">ログアウト</a></li>
+        <li><a href="{{url_for('app.register')}}">登録</a></li>
+        {% endif %}
+        <li><a href="{{url_for('app.user')}}">ユーザ画面</a></li>
+    </ul>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

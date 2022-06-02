@@ -1,26 +1,36 @@
-import os
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from backend.app.app import db, login_manager
+from flask_bcrypt import generate_password_hash, check_password_hash 
+from flask_login import UserMixin
 
-base_dir = os.path.dirname(__file__)
 
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + \
-    os.path.join(base_dir, 'data.sqlite')
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 # 使用しない機能と思うため,また明示的にオフしておかないとエラーが出ることがある
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
-class Person(db.model):
+#UserMixinはFlask-Loginライブラリを利用するユーザーが持つべきオブジェクトを定義
+class User(UserMixin.model):
     __tablename__ = 'users'
     
     id = db.Cloumn(db.Integer, primary_key=True, autoincrement=True)
-    user_name = db.Column(db.String(255))
-    password = db.Column(db.Strong(255))
+    user_name = db.Column(db.String(64))
+    password = db.Column(db.String(128))
+    
+    def __init__(self,username, password):
+        self.username = username
+        self.password = generate_password_hash(password)#ハッシュ化
+        #パスワードがあってるかチェックする
+    def validate_password(self, password):
+        return check_password_hash(self.password, password)
+    
+    #ユーザーを追加するためのメソッド
+    def add_user(self):
+        with db.session.begin(subtransactions=True):
+            db.session.add(self)
+        db.session.commit()   
     
 class Terminologie(db.model):
     __tablename__ = 'terminologies'
