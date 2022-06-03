@@ -27,7 +27,7 @@ def logout():
 def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User.select_by_email(form.email.data)
+        user = User.select_by_username(form.username.data)
         #emailから取得したUserのパスワードとクライアントが入力したパスワードが一致
         if user and user.validate_password(form.password.data):
             login_user(user, remember=True)
@@ -42,7 +42,7 @@ def register():
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User(
-            email = form.email.data,
+            # email = form.email.data,
             username = form.username.data,
             password = form.password.data
         )

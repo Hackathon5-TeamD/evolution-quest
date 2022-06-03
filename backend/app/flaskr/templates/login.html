@@ -6,7 +6,7 @@
 {% endfor %}
 <form method="POST">
     {{form.csrf_token}}
-    {{render_field(form.email)}}
+    {{render_field(form.username)}}
     {{render_field(form.password)}}
     {{form.submit()}}
 </form> 

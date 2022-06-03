@@ -17,4 +17,7 @@ done
 # cd /usr/src/app/app && gunicorn sql_app.main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
 # cd /usr/src/app && gunicorn app.app:app -w 4 -k 0.0.0.0:8000
 
+cd /usr/src/app && flask db init
+cd /usr/src/app && flask db upgrade 
 cd /usr/src/app && flask run --host=0.0.0.0
+

@@ -13,12 +13,12 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), unique=True, index=True)
+    # email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), index=True)
     password = db.Column(db.String(128))
     
-    def __init__(self, email, username, password):
-        self.email = email
+    def __init__(self, username, password):
+        # self.email = email
         self.username = username
         self.password = generate_password_hash(password)
         
@@ -30,8 +30,8 @@ class User(UserMixin, db.Model):
             db.session.add(self)
         db.session.commit()
         
-    @classmethod
-    def select_by_email(cls, email):
-        return cls.query.filter_by(email=email).first()
+    # @classmethod
+    # def select_by_email(cls, email):
+    #     return cls.query.filter_by(email=email).first()
     
     
