@@ -1,4 +1,4 @@
-/* body {
+body {
   background-color: rgba(80, 163, 162, 1);
   position: relative;
 }
@@ -21,9 +21,9 @@
 }
 
 Button.login {
-  width: 100%; */
-/* background-color: white; */
-/* }
+  width: 100%;
+  /* background-color: white; */
+}
 
 .form {
   width: 50%;
@@ -42,4 +42,4 @@ Button.login {
   color: white;
   padding-top: 10px;
   font-size: 13px;
-} */
+}
