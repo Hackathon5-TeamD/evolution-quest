@@ -12,7 +12,7 @@
         {% if current_user.is_authenticated %}
         <li><a href="{{url_for('app.logout')}}">ログアウト</a></li>
         {% else %}
-        <li><a href="{{url_for('app.login')}}">ログアウト</a></li>
+        <li><a href="{{url_for('app.login')}}">ログイン</a></li>
         <li><a href="{{url_for('app.register')}}">登録</a></li>
         {% endif %}
         <li><a href="{{url_for('app.user')}}">ユーザ画面</a></li>

@@ -2,11 +2,12 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>ユーザ情報登録画面</h1>
-<form method=""POST">
+<form method="POST">
     {{form.csrf_token}}
     {{render_field(form.username)}}
+    {{render_field(form.email)}}
     {{render_field(form.password)}}
     {{render_field(form.password_confirm)}}
     {{form.submit()}}
-</form>
+</form> 
 {% endblock %}
