@@ -1,0 +1,21 @@
+.tableContainer {
+  width: 90%;
+  margin: 2em auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  width: 90%;
+}
+
+.tableHeader {
+  background-color: #50a3a2 !important;
+  color: #fff !important;
+}
+
+.pagenation:hover {
+  background-color: #50a3a2 !important;
+  color: #fff !important;
+}
