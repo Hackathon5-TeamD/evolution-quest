@@ -1,10 +1,20 @@
 from flask import Flask
 
+# モジュールのインポート
+from user import user_module
+from terminologie import terminologie_module
+from result import result_module
+
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def index():
     return "Hello,World"
 
-if __name__ == '__main__':
-    app.run()
+# コントローラー先
+app.register_blueprint(user_module)
+app.register_blueprint(terminologie_module)
+app.register_blueprint(result_module)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
