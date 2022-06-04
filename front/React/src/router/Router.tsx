@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Login } from "../components/Login";
+import { Login } from "../components/pages/Login/Login";
 import { MainPage } from "../components/pages/Main/MainPage";
 import { Register } from "../components/pages/Register/Register";
 import { ResultRank } from "../components/pages/Result/ResultRank";

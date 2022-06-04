@@ -15,31 +15,3 @@ body {
   height: 300px;
   background-color: rgba(80, 163, 162, 1);
 }
-
-.title {
-  color: white;
-}
-
-Button.login {
-  width: 100%;
-  /* background-color: white; */
-}
-
-.form {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.resister {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 2px;
-  padding-top: 20px;
-}
-
-.resister p {
-  color: white;
-  padding-top: 10px;
-  font-size: 13px;
-}
