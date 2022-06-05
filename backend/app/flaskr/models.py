@@ -30,6 +30,8 @@ class User(UserMixin, db.Model):
             db.session.add(self)
         db.session.commit()
         
+        
+        
     # @classmethod
     # def select_by_email(cls, email):
     #     return cls.query.filter_by(email=email).first()
