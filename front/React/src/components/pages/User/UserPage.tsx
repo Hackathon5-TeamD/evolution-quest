@@ -13,12 +13,10 @@ export const UserPage = () => {
           outerContainerId={"outer-container"}
         />
         <div id="page-wrap">
-          <div>
-            <div className={styles.container}>
-              <Header />
-              <SubTitle />
-              <GameRecord />
-            </div>
+          <div className={styles.container}>
+            <Header />
+            <SubTitle />
+            <GameRecord />
           </div>
         </div>
       </div>
