@@ -1,11 +1,13 @@
-import "../App.css";
+import { Title } from "./Title/Title";
+import styles from "./Login.module.css";
 import { Input, Button } from "semantic-ui-react";
+import { RegisterButton } from "./RegisterButton/RegisterButton";
 
 export const Login = () => {
   return (
     <div>
-      <h1 className="title">LOG IN</h1>
-      <div className="form">
+      <Title />
+      <div className={styles.form}>
         <Input type="text" focus fluid placeholder="UserName" />
         <br />
         <br />
@@ -15,13 +17,8 @@ export const Login = () => {
         <Input type="password" focus fluid placeholder="Confirm Password" />
         <br />
         <br />
-        <Button className="login">Log in</Button>
-        <div className="resister">
-          <p>Not as member yet?</p>
-          <Button basic size="mini" floated="right" color="black">
-            Resister
-          </Button>
-        </div>
+        <Button className={styles.button}>Log in</Button>
+        <RegisterButton />
       </div>
     </div>
   );
