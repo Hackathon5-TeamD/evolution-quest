@@ -30,7 +30,7 @@ export const SideBar = ({ pageWrapId, outerContainerId }: SidemenuProps) => {
         <BiMedal />
         Result
       </a>
-      <a className={styles.menuItem} href="/login">
+      <a className={styles.menuItem} href="/">
         <BiLogInCircle />
         Log in
       </a>
