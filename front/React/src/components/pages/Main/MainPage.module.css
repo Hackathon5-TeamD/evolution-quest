@@ -1,0 +1,6 @@
+.gamePageWrapper {
+  display: flex;
+  height: 100%;
+  width: 96%;
+  margin: auto;
+}
