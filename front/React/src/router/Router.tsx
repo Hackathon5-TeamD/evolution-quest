@@ -6,6 +6,7 @@ import { Register } from "../components/pages/Register/Register";
 import { ResultPage } from "../components/pages/Result/ResultPage";
 import { GameStart } from "../components/pages/Start/GameStart";
 import { UserPage } from "../components/pages/User/UserPage";
+import { NotFound } from "../components/pages/ErrorPages/NotFound";
 
 export const Router = () => {
   return (
@@ -17,6 +18,7 @@ export const Router = () => {
         <Route path="userpage" element={<UserPage />} />
         <Route path="main" element={<MainPage />} />
         <Route path="result" element={<ResultPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
