@@ -22,7 +22,7 @@ export const SideBar = ({ pageWrapId, outerContainerId }: SidemenuProps) => {
         <BiHomeAlt />
         Home
       </a>
-      <a className={styles.menuItem} href="/user">
+      <a className={styles.menuItem} href="/userpage">
         <BiUser />
         User
       </a>
