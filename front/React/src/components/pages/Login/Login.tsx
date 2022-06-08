@@ -7,7 +7,7 @@ export const Login = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <Title />
+        <Title text="LOG IN" />
         <Input
           className={styles.form}
           type="text"
@@ -29,7 +29,7 @@ export const Login = () => {
           fluid
           placeholder="Confirm Password"
         />
-        <Button className={styles.form} size="small">
+        <Button className={styles.loginbutton} size="small">
           Log in
         </Button>
         <RegisterButton />
