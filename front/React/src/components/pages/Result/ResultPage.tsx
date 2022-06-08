@@ -24,9 +24,10 @@ export const ResultPage = () => {
   const [isReady, setReady] = useState<boolean>(false);
   const [timesFetchedArr2, setTimesFetchedArr2] = useState<number>(0);
 
+  // サーバーにリザルトデータ配列を取りに行く関数
   const fetch = async (page: number) => {
     const res = await getRanking(page);
-
+    // サーバーから取ってきたリザルトデータ配列をページごとに違うstate(配列)に入れる
     if (page === 1) {
       setRankingArr1(res);
       setReady(true);
@@ -41,6 +42,9 @@ export const ResultPage = () => {
     fetch(1);
   }, []);
 
+  /**
+   * ページ１、ページ２のテーブルを変数に入れる
+   */
   const page1 =
     currentPage === 1 && isReady && rankingArr1.length !== 0 ? (
       <RankingTable
@@ -53,9 +57,7 @@ export const ResultPage = () => {
         setTimesFetchedArr2={setTimesFetchedArr2}
       />
     ) : (
-      <>
-        <h1>Loading...</h1>
-      </>
+      <h1>Loading...</h1>
     );
 
   const page2 =
@@ -70,26 +72,17 @@ export const ResultPage = () => {
         setTimesFetchedArr2={setTimesFetchedArr2}
       />
     ) : (
-      <>
-        <h1>Loading...その２</h1>
-      </>
+      <h1>Loading...その２</h1>
     );
 
   return (
     <div id="outer-container" className={styles.wrapper}>
-      <div>
-        <SideBar
-          pageWrapId={"page-wrap"}
-          outerContainerId={"outer-container"}
-        />
-        <div id="page-wrap">
-          <div>
-            <div className={styles.container}>
-              <Header />
-              <SubTitle currentPage={currentPage} />
-              {currentPage === 1 ? page1 : page2}
-            </div>
-          </div>
+      <SideBar pageWrapId={"page-wrap"} outerContainerId={"outer-container"} />
+      <div id="page-wrap">
+        <div className={styles.container}>
+          <Header />
+          <SubTitle currentPage={currentPage} />
+          {currentPage === 1 ? page1 : page2}
         </div>
       </div>
     </div>
