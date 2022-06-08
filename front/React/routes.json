@@ -1,4 +1,4 @@
 {
-  "/results/:1": "/result1",
-  "/results/:2": "/result2"
+  "/results/1": "/result1",
+  "/results/2": "/result2"
 }
