@@ -9,6 +9,7 @@ import { getUserRecord } from "../../../api/GetDataAPI";
 
 type mockData = {
   id: number;
+  user_name: string;
   played_at: Date;
   accuracy: number;
   wpm: number;
@@ -40,7 +41,7 @@ export const UserPage = () => {
         <div id="page-wrap">
           <div className={styles.container}>
             <Header />
-            <SubTitle />
+            <SubTitle user_name={recordArr[0].user_name} />
             {recordArr.length !== 0 ? (
               <GameRecord recordArr={recordArr} />
             ) : (
