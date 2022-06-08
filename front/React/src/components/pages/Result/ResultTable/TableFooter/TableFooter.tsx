@@ -1,4 +1,4 @@
-import React from "react";
+import { VFC } from "react";
 import styles from "./TableFooter.module.css";
 import { Table, Menu, Icon } from "semantic-ui-react";
 
@@ -7,21 +7,32 @@ type Props = {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   fetch: (page: number) => Promise<void>;
   setReady: React.Dispatch<React.SetStateAction<boolean>>;
+  timesFetchedArr2: number;
+  setTimesFetchedArr2: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const TableFooter = (props: Props) => {
-  const { currentPage, setCurrentPage, fetch, setReady } = props;
+export const TableFooter: VFC<Props> = (props: Props) => {
+  const {
+    currentPage,
+    setCurrentPage,
+    fetch,
+    setReady,
+    timesFetchedArr2,
+    setTimesFetchedArr2,
+  } = props;
 
   const onClickNext = () => {
     setCurrentPage(() => 2);
-    setReady(false);
-    fetch(2);
+    if (timesFetchedArr2 === 0) {
+      setReady(false);
+      fetch(2);
+    }
+
+    setTimesFetchedArr2(timesFetchedArr2 + 1);
   };
 
   const onClickPrev = () => {
-    setCurrentPage((prev) => {
-      return prev - 1;
-    });
+    setCurrentPage(() => 1);
   };
 
   return (
@@ -29,24 +40,36 @@ export const TableFooter = (props: Props) => {
       <Table.Row>
         <Table.HeaderCell colSpan="6">
           <Menu floated="right" pagination>
-            <Menu.Item as="a" icon className={styles.pagenationBtn}>
-              <Icon name="chevron left" />
-            </Menu.Item>
-            <Menu.Item as="a" className={styles.pagenation}>
-              01-10
-            </Menu.Item>
-            <Menu.Item as="a" className={styles.pagenation}>
-              11-20
-            </Menu.Item>
+            {currentPage === 1 ? (
+              <>
+                <Menu.Item as="a" className={styles.pagenation}>
+                  11-20
+                </Menu.Item>
 
-            <Menu.Item
-              as="a"
-              icon
-              className={styles.pagenationBtn}
-              onClick={onClickNext}
-            >
-              <Icon name="chevron right" />
-            </Menu.Item>
+                <Menu.Item
+                  as="a"
+                  icon
+                  className={styles.pagenationBtn}
+                  onClick={onClickNext}
+                >
+                  <Icon name="chevron right" />
+                </Menu.Item>
+              </>
+            ) : (
+              <>
+                <Menu.Item
+                  as="a"
+                  icon
+                  className={styles.pagenationBtn}
+                  onClick={onClickPrev}
+                >
+                  <Icon name="chevron left" />
+                </Menu.Item>
+                <Menu.Item as="a" className={styles.pagenation}>
+                  01-10
+                </Menu.Item>
+              </>
+            )}
           </Menu>
         </Table.HeaderCell>
       </Table.Row>

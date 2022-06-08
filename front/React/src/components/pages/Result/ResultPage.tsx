@@ -22,8 +22,7 @@ export const ResultPage = () => {
   const [rankingArr2, setRankingArr2] = useState<mockData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isReady, setReady] = useState<boolean>(false);
-
-  console.log(rankingArr2.length + " : rankingArr2.length");
+  const [timesFetchedArr2, setTimesFetchedArr2] = useState<number>(0);
 
   const fetch = async (page: number) => {
     const res = await getRanking(page);
@@ -52,6 +51,8 @@ export const ResultPage = () => {
         setCurrentPage={setCurrentPage}
         fetch={fetch}
         setReady={setReady}
+        timesFetchedArr2={timesFetchedArr2}
+        setTimesFetchedArr2={setTimesFetchedArr2}
       />
     ) : (
       <>
@@ -67,6 +68,8 @@ export const ResultPage = () => {
         setCurrentPage={setCurrentPage}
         fetch={fetch}
         setReady={setReady}
+        timesFetchedArr2={timesFetchedArr2}
+        setTimesFetchedArr2={setTimesFetchedArr2}
       />
     ) : (
       <>
