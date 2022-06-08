@@ -21,27 +21,41 @@ export const ResultPage = () => {
   const [rankingArr1, setRankingArr1] = useState<mockData[]>([]);
   const [rankingArr2, setRankingArr2] = useState<mockData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const isPage1Ready: boolean = rankingArr1.length === 0 ? false : true;
-  const isPage2Ready: boolean = rankingArr2.length === 0 ? false : true;
+  const [isReady, setReady] = useState<boolean>(false);
 
-  console.log(currentPage);
+  console.log(rankingArr2.length + " : rankingArr2.length");
 
-  const fetch = async () => {
-    const res = await getRanking(currentPage);
+  console.log(currentPage + " : current page");
+
+  const fetch = async (page: number) => {
+    const res = await getRanking(page);
+    console.log("レスポンス: " + res);
+
     if (currentPage === 1) {
       setRankingArr1(res);
+      setReady(true);
     } else {
-      setRankingArr2(res);
+      setRankingArr2(() => {
+        return res;
+      });
+      // setReady(true);
     }
   };
 
+  // 1回目のローディングは1-10位のデータを何もしなくても取ってくる
   useEffect(() => {
-    fetch();
+    fetch(1);
   }, []);
 
   const page1 =
-    currentPage === 1 && isPage1Ready ? (
-      <RankingTable rankingArr={rankingArr1} setCurrentPage={setCurrentPage} />
+    currentPage === 1 && isReady ? (
+      <RankingTable
+        rankingArr={rankingArr1}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        fetch={fetch}
+        setReady={setReady}
+      />
     ) : (
       <>
         <h1>Loading...</h1>
@@ -49,13 +63,23 @@ export const ResultPage = () => {
     );
 
   const page2 =
-    currentPage === 2 && isPage2Ready ? (
-      <RankingTable rankingArr={rankingArr2} setCurrentPage={setCurrentPage} />
+    currentPage === 2 && isReady ? (
+      <RankingTable
+        rankingArr={rankingArr2}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        fetch={fetch}
+        setReady={setReady}
+      />
     ) : (
       <>
-        <h1>Loading...</h1>
+        <h1>Loading...その２</h1>
       </>
     );
+
+  useEffect(() => {
+    setReady(true);
+  }, [rankingArr1, rankingArr2]);
 
   return (
     <div id="outer-container" className={styles.wrapper}>

@@ -13,11 +13,14 @@ type Props = {
     accuracy: number;
     wpm: number;
   }>;
+  currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  fetch: (page: number) => Promise<void>;
+  setReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const RankingTable = memo((props: Props) => {
-  const { rankingArr, setCurrentPage } = props;
+  const { rankingArr, currentPage, setCurrentPage, fetch, setReady } = props;
 
   return (
     <div className={styles.tableContainer}>
@@ -36,7 +39,12 @@ export const RankingTable = memo((props: Props) => {
             );
           })}
         </Table.Body>
-        <TableFooter setCurrentPage={setCurrentPage} />
+        <TableFooter
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          fetch={fetch}
+          setReady={setReady}
+        />
       </Table>
     </div>
   );

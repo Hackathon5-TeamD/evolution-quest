@@ -3,17 +3,19 @@ import styles from "./TableFooter.module.css";
 import { Table, Menu, Icon } from "semantic-ui-react";
 
 type Props = {
+  currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  fetch: (page: number) => Promise<void>;
+  setReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const TableFooter = (props: Props) => {
-  const { setCurrentPage } = props;
+  const { currentPage, setCurrentPage, fetch, setReady } = props;
 
   const onClickNext = () => {
-    setCurrentPage((prev) => {
-      console.log("押された");
-      return prev + 1;
-    });
+    setCurrentPage(() => 2);
+    setReady(false);
+    fetch(2);
   };
 
   const onClickPrev = () => {
