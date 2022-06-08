@@ -25,20 +25,17 @@ export const ResultPage = () => {
 
   console.log(rankingArr2.length + " : rankingArr2.length");
 
-  console.log(currentPage + " : current page");
-
   const fetch = async (page: number) => {
     const res = await getRanking(page);
     console.log("レスポンス: " + res);
 
-    if (currentPage === 1) {
+    console.log(page + " : page");
+    if (page === 1) {
       setRankingArr1(res);
       setReady(true);
     } else {
-      setRankingArr2(() => {
-        return res;
-      });
-      // setReady(true);
+      setRankingArr2(res);
+      setReady(true);
     }
   };
 
@@ -48,7 +45,7 @@ export const ResultPage = () => {
   }, []);
 
   const page1 =
-    currentPage === 1 && isReady ? (
+    currentPage === 1 && isReady && rankingArr1.length !== 0 ? (
       <RankingTable
         rankingArr={rankingArr1}
         currentPage={currentPage}
@@ -63,7 +60,7 @@ export const ResultPage = () => {
     );
 
   const page2 =
-    currentPage === 2 && isReady ? (
+    currentPage === 2 && isReady && rankingArr2.length !== 0 ? (
       <RankingTable
         rankingArr={rankingArr2}
         currentPage={currentPage}
@@ -76,10 +73,6 @@ export const ResultPage = () => {
         <h1>Loading...その２</h1>
       </>
     );
-
-  useEffect(() => {
-    setReady(true);
-  }, [rankingArr1, rankingArr2]);
 
   return (
     <div id="outer-container" className={styles.wrapper}>
