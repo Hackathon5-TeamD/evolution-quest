@@ -17,14 +17,12 @@ type mockData = {
 
 export const UserPage = () => {
   const [recordArr, setRecordArr] = useState<mockData[]>([]);
-  // const [isReady, setReady] = useState<boolean>(false);
 
   // サーバーにユーザーデータ配列を取りに行く関数
   const fetch = async () => {
     const res = await getUserRecord();
-    // サーバーから取ってきたリザルトデータ配列をページごとに違うstate(配列)に入れる
+    // サーバーから取ってきたユーザーデータ配列をページごとに違うstate(配列)に入れる
     setRecordArr(res);
-    // setReady(true);
   };
 
   useEffect(() => {
@@ -41,7 +39,7 @@ export const UserPage = () => {
         <div id="page-wrap">
           <div className={styles.container}>
             <Header />
-            <SubTitle user_name={recordArr[0].user_name} />
+            <SubTitle user_name={recordArr[0]["user_name"]} />
             {recordArr.length !== 0 ? (
               <GameRecord recordArr={recordArr} />
             ) : (
