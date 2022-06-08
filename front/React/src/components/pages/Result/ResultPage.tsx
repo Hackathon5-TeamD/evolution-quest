@@ -6,7 +6,7 @@ import { SideBar } from "../SideBar/SideBar";
 import styles from "./ResultPage.module.css";
 
 import { useEffect, useState } from "react";
-import { getRanking } from "./GetDataAPI";
+import { getRanking } from "../../../api/GetDataAPI";
 
 type mockData = {
   id: number;
