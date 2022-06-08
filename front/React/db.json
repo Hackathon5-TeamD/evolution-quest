@@ -219,30 +219,35 @@
   "record": [
     {
       "id": 1,
+      "user_name": "hogefuga",
       "played_at": "Mon Jun 10 2022 17:00 GMT",
       "accuracy": 94,
       "wpm": 133
     },
     {
       "id": 2,
+      "user_name": "hogefuga",
       "played_at": "Mon Ari 10 2022 16:00 GMT",
       "accuracy": 93,
       "wpm": 124
     },
     {
       "id": 3,
+      "user_name": "hogefuga",
       "played_at": "Mon Feb 10 2022 20:00 GMT",
       "accuracy": 89,
       "wpm": 103
     },
     {
       "id": 4,
+      "user_name": "hogefuga",
       "played_at": "Mon Mar 14 2022 19:00 GMT",
       "accuracy": 86,
       "wpm": 163
     },
     {
       "id": 5,
+      "user_name": "hogefuga",
       "played_at": "Mon May 20 2022 15:00 GMT",
       "accuracy": 85,
       "wpm": 93
