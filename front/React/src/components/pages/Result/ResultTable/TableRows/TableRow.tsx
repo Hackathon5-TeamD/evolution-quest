@@ -14,7 +14,7 @@ export const TableRow = (props: Props) => {
     <Table.Row>
       <Table.Cell>1</Table.Cell>
       <Table.Cell>{user_name}</Table.Cell>
-      <Table.Cell>{played_at}}</Table.Cell>
+      <Table.Cell>{played_at}</Table.Cell>
       <Table.Cell>{accuracy}</Table.Cell>
       <Table.Cell>{wpm}</Table.Cell>
     </Table.Row>
