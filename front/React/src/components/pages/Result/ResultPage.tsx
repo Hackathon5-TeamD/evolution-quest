@@ -26,9 +26,7 @@ export const ResultPage = () => {
 
   const fetch = async (page: number) => {
     const res = await getRanking(page);
-    console.log("レスポンス: " + res);
 
-    console.log(page + " : page");
     if (page === 1) {
       setRankingArr1(res);
       setReady(true);
@@ -88,7 +86,7 @@ export const ResultPage = () => {
           <div>
             <div className={styles.container}>
               <Header />
-              <SubTitle />
+              <SubTitle currentPage={currentPage} />
               {currentPage === 1 ? page1 : page2}
             </div>
           </div>
