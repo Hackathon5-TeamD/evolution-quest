@@ -6,17 +6,10 @@ import styles from "./UserPage.module.css";
 
 import { useEffect, useState } from "react";
 import { getUserRecord } from "../../../api/GetDataAPI";
-
-type mockData = {
-  id: number;
-  user_name: string;
-  played_at: Date;
-  accuracy: number;
-  wpm: number;
-};
+import { recordData } from "../../../types/UserType";
 
 export const UserPage = () => {
-  const [recordArr, setRecordArr] = useState<mockData[]>([]);
+  const [recordArr, setRecordArr] = useState<recordData[]>([]);
 
   // サーバーにユーザーデータ配列を取りに行く関数
   const fetch = async () => {
@@ -39,9 +32,12 @@ export const UserPage = () => {
         <div id="page-wrap">
           <div className={styles.container}>
             <Header />
-            <SubTitle user_name={recordArr[0]["user_name"]} />
+
             {recordArr.length !== 0 ? (
-              <GameRecord recordArr={recordArr} />
+              <>
+                <SubTitle user_name={recordArr[0]["user_name"]} />
+                <GameRecord recordArr={recordArr} />
+              </>
             ) : (
               <h1>Loading...</h1>
             )}

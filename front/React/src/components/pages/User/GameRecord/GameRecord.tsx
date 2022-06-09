@@ -1,13 +1,9 @@
 import styles from "./GameRecord.module.css";
 import { GameRecordTable } from "./Table/Table";
+import { recordData } from "../../../../types/UserType";
 
 type Props = {
-  recordArr: Array<{
-    id: number;
-    played_at: Date;
-    accuracy: number;
-    wpm: number;
-  }>;
+  recordArr: recordData[];
 };
 
 export const GameRecord = (props: Props) => {

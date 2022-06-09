@@ -3,14 +3,10 @@ import { Table } from "semantic-ui-react";
 import { TableHeader } from "./TableHeader/TableHeader";
 import { TableRow } from "./TableRow/TableRow";
 import styles from "./Table.module.css";
+import { recordData } from "../../../../../types/UserType";
 
 type Props = {
-  recordArr: Array<{
-    id: number;
-    played_at: Date;
-    accuracy: number;
-    wpm: number;
-  }>;
+  recordArr: recordData[];
 };
 
 export const GameRecordTable = (props: Props) => {
@@ -21,15 +17,7 @@ export const GameRecordTable = (props: Props) => {
         <TableHeader />
         <Table.Body>
           {recordArr.map((row, idx) => {
-            return (
-              <TableRow
-                key={row.id}
-                idx={idx}
-                played_at={row.played_at}
-                accuracy={row.accuracy}
-                wpm={row.wpm}
-              />
-            );
+            return <TableRow key={row.id} idx={idx} data={row} />;
           })}
         </Table.Body>
       </Table>

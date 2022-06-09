@@ -1,15 +1,15 @@
 import { Table } from "semantic-ui-react";
+import { recordData } from "../../../../../../types/UserType";
 import styles from "./TableRow.module.css";
 
 type Props = {
   idx: number;
-  played_at: Date;
-  accuracy: number;
-  wpm: number;
+  data: recordData;
 };
 
 export const TableRow = (props: Props) => {
-  const { idx, played_at, accuracy, wpm } = props;
+  const { idx, data } = props;
+  const { played_at, accuracy, wpm } = data;
   return (
     <Table.Row>
       <Table.Cell className={styles.cell}>{idx + 1}</Table.Cell>
