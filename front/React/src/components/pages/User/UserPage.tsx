@@ -35,7 +35,7 @@ export const UserPage = () => {
 
             {recordArr.length !== 0 ? (
               <>
-                <SubTitle user_name={recordArr[0]["user_name"]} />
+                <SubTitle>User name : {recordArr[0]["user_name"]}</SubTitle>
                 <GameRecord recordArr={recordArr} />
               </>
             ) : (

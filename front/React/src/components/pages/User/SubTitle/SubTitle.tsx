@@ -1,10 +1,6 @@
 import styles from "./SubTitle.module.css";
+import { FC } from "react";
 
-type Props = {
-  user_name: string;
-};
-
-export const SubTitle = (props: Props) => {
-  const { user_name } = props;
-  return <p className={styles.subtitle}>User name : {user_name}</p>;
+export const SubTitle: FC = ({ children }) => {
+  return <p className={styles.subtitle}>{children}</p>;
 };
