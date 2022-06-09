@@ -24,8 +24,8 @@ export const SideBar: VFC<SidemenuProps> = memo(
     return (
       <Menu>
         <p className={styles.memuTitle}>Menu</p>
-        <Button linkTo={"/"} icon={<BiHomeAlt />}>
-          Home
+        <Button linkTo={"/gamestart"} icon={<BiHomeAlt />}>
+          Game
         </Button>
         <Button linkTo={"/userpage"} icon={<BiUser />}>
           User
