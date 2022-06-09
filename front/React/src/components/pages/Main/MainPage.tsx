@@ -7,10 +7,11 @@ import useTypingGame from "react-typing-game-hook";
 import { useTimer } from "../../../hooks/useTimer";
 import { useGame } from "../../../hooks/useGame";
 import { useState, useEffect } from "react";
-// import { getTerminologie } from "../../../api/Terminologie";
+import { StartAlert } from "./StartAlert/StartAlert";
 
 export const MainPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isAlertOn, setAlertOn] = useState(true);
   const { jaTerm, roTerm, fetchGame } = useGame();
   const fetchGameData = () => fetchGame();
   const { time } = useTimer();
@@ -71,6 +72,7 @@ export const MainPage = () => {
       {isModalOpen && (
         <Modal accuracy={flooredAccuracy} wpm={wpm} durationTime={sec} />
       )}
+      {isAlertOn && <StartAlert setAlertOn={setAlertOn} />}
     </div>
   );
 };
