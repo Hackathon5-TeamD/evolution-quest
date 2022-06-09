@@ -14,8 +14,13 @@ export const Results = () => {
         <Button
           buttonName={"Another Game"}
           description={"or press Enter to restart"}
+          linkTo={"/main"}
         />
-        <Button buttonName={"Finish"} description={"to go back to main"} />
+        <Button
+          buttonName={"Finish"}
+          description={"to go back to main"}
+          linkTo={"/gamestart"}
+        />
       </div>
     </div>
   );
