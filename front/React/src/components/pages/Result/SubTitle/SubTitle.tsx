@@ -1,5 +1,12 @@
 import styles from "./SubTitle.module.css";
 
-export const SubTitle = () => {
-  return <p className={styles.ranking}>ランキング 1-10 位</p>;
+type Props = {
+  currentPage: number;
+};
+
+export const SubTitle = (props: Props) => {
+  const { currentPage } = props;
+  const rankingRange = currentPage === 1 ? "1-10" : "11-20";
+
+  return <p className={styles.ranking}>ランキング {rankingRange}位</p>;
 };
