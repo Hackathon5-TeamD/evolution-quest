@@ -4,25 +4,22 @@ import { GameArea } from "./gameArea/GameArea";
 import { RecordArea } from "./recordArea/RecordArea";
 import { Modal } from "./Modal/Modal";
 import useTypingGame from "react-typing-game-hook";
+import { useTimer } from "../../../hooks/useTimer";
+import { useGame } from "../../../hooks/useGame";
 import { useState, useEffect } from "react";
-import { getTerminologie } from "../../../api/Terminologie";
+// import { getTerminologie } from "../../../api/Terminologie";
 
 export const MainPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [jaTerm, setJaTerm] = useState("");
-  const [roTerm, setRoTerm] = useState("");
+  const { jaTerm, roTerm, fetchGame } = useGame();
+  const fetchGameData = () => fetchGame();
+  const { time } = useTimer();
+  // console.log(time);
 
   const fetch = async () => {
-    const res = await getTerminologie();
-
-    // サーバーから取ってきた問題をstate(配列)に入れる
-    setRoTerm(res[0]["description_ro"]);
-    setJaTerm(res[0]["description_ja"]);
+    const res = await fetchGameData();
+    insertTyping();
   };
-
-  useEffect(() => {
-    fetch();
-  }, []);
 
   // Call the hook
   const {
@@ -35,6 +32,10 @@ export const MainPage = () => {
     pauseOnError: true,
     countErrors: "everytime",
   });
+
+  useEffect(() => {
+    fetchGameData();
+  }, []);
 
   // ミリ秒数： getDuration()
   // 正解数: correctChar

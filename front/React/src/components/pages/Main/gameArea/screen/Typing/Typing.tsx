@@ -1,3 +1,5 @@
+import styles from "./Typing.module.css";
+
 type Props = {
   roTerm: string;
   insertTyping: (char?: string | undefined) => void;
@@ -12,6 +14,7 @@ export const TypingGameComponent = (props: Props) => {
 
   return (
     <h1
+      className={styles.roTerm}
       onKeyDown={(e) => {
         const key = e.key;
         if (key === "Escape") {
@@ -27,7 +30,7 @@ export const TypingGameComponent = (props: Props) => {
     >
       {chars.split("").map((char, index) => {
         let state = charsState[index];
-        let color = state === 0 ? "black" : state === 1 ? "green" : "red";
+        let color = state === 0 ? "black" : state === 1 ? "#50a3a2" : "#cd5360";
         return (
           <span key={char + index} style={{ color }}>
             {char}
