@@ -21,8 +21,8 @@ class RegisterForm (Form):
     password_confirm = PasswordField('パスワード確認: ', validators=[DataRequired()])
     submit = SubmitField('登録')
     
-    # def validate_email(self, field):
-    #     if User.select_by_email(field.data):
-    #         raise ValidationError('メールアドレスは既に登録されています')
+    def validate_username(self, field):
+        if User.select_by_username(field.data):
+            raise ValidationError('その名前は既に登録されています')
         
     
