@@ -6,7 +6,6 @@ type Props = {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   fetch: (page: number) => Promise<void>;
-
   timesFetchedArr2: number;
   setTimesFetchedArr2: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -16,7 +15,6 @@ export const TableFooter: VFC<Props> = (props: Props) => {
     currentPage,
     setCurrentPage,
     fetch,
-
     timesFetchedArr2,
     setTimesFetchedArr2,
   } = props;
@@ -26,7 +24,6 @@ export const TableFooter: VFC<Props> = (props: Props) => {
     if (timesFetchedArr2 === 0) {
       fetch(2);
     }
-
     setTimesFetchedArr2(timesFetchedArr2 + 1);
   };
 
@@ -44,7 +41,6 @@ export const TableFooter: VFC<Props> = (props: Props) => {
                 <Menu.Item as="a" className={styles.pagenation}>
                   11-20
                 </Menu.Item>
-
                 <Menu.Item
                   as="a"
                   icon
