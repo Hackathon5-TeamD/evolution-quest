@@ -10,10 +10,7 @@ export const JapaneseTerm = (props: Props) => {
     <div>
       <p className={styles.typeTitle}>
         Web3層構造
-        <span>
-          {/* プレゼンテーション層、アプリケーション層、データ層からなるなんかアレだったりもするんだけどいまいちよくわかってないのでタイピングして覚えたい。なんとなく長文を打って表示のされ方を確認中なので文章に特に意味はないです */}
-          {text}
-        </span>
+        <span>{text}</span>
       </p>
     </div>
   );

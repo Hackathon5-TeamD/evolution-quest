@@ -9,7 +9,7 @@ type Props = {
 
 export const TypingGameComponent = (props: Props) => {
   const { insertTyping, resetTyping, deleteTyping, chars, charsState } = props;
-  // Capture and display!
+
   return (
     <h1
       onKeyDown={(e) => {

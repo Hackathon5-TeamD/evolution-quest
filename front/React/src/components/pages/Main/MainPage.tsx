@@ -1,32 +1,75 @@
-import { useState, useEffect } from "react";
 import styles from "./MainPage.module.css";
 import "react-simple-keyboard/build/css/index.css";
 import { GameArea } from "./gameArea/GameArea";
 import { RecordArea } from "./recordArea/RecordArea";
 import { Modal } from "./Modal/Modal";
-
-// import { getTerminologie } from "../../../api/Terminologie";
+import useTypingGame from "react-typing-game-hook";
+import { useState, useEffect } from "react";
+import { getTerminologie } from "../../../api/Terminologie";
 
 export const MainPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  // const [currentTerminologie, setCurrentTerminologie] = useState("");
+  const [jaTerm, setJaTerm] = useState("");
+  const [roTerm, setRoTerm] = useState("");
 
-  // const fetch = async (page: number) => {
-  //   const res = await getTerminologie();
+  const fetch = async () => {
+    const res = await getTerminologie();
 
-  //   // サーバーから取ってきた問題をstate(配列)に入れる
-  //   setCurrentTerminologie(res);
-  // };
+    // サーバーから取ってきた問題をstate(配列)に入れる
+    setRoTerm(res[0]["description_ro"]);
+    setJaTerm(res[0]["description_ja"]);
+  };
 
-  // useEffect(() => {
-  //   fetch(1);
-  // }, []);
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  // Call the hook
+  const {
+    // phase : {0:ミスタート,　1:　入力中,　2:終わり}
+    states: { chars, charsState, correctChar, errorChar, phase },
+    // getDuration() : スタートから現在打ってる文字までにかかった秒数(ミリ秒)
+    actions: { insertTyping, resetTyping, deleteTyping, getDuration },
+  } = useTypingGame(roTerm, {
+    skipCurrentWordOnSpace: true,
+    pauseOnError: true,
+    countErrors: "everytime",
+  });
+
+  // ミリ秒数： getDuration()
+  // 正解数: correctChar
+  // ミスタイプ: errorChar
+
+  // accuracy計算
+  let accuracy = (correctChar / (correctChar + errorChar)) * 100;
+  let flooredAccuracy = Math.floor(accuracy * 10) / 10;
+
+  // WPM計算
+  const sec = getDuration() / 1000;
+  let wpm = Math.floor(((correctChar + errorChar) / sec) * 60);
+
+  useEffect(() => {
+    if (phase === 2) {
+      console.log(getDuration() + " : ミリ秒かかった");
+      setModalOpen(true);
+    }
+  }, [phase]);
 
   return (
     <div className={styles.gamePageWrapper}>
-      <GameArea setModalOpen={setModalOpen} />
-      <RecordArea />
-      {isModalOpen && <Modal />}
+      <GameArea
+        jaTerm={jaTerm}
+        roTerm={roTerm}
+        insertTyping={insertTyping}
+        resetTyping={resetTyping}
+        deleteTyping={deleteTyping}
+        chars={chars}
+        charsState={charsState}
+      />
+      <RecordArea accuracy={flooredAccuracy} wpm={wpm} />
+      {isModalOpen && (
+        <Modal accuracy={flooredAccuracy} wpm={wpm} durationTime={sec} />
+      )}
     </div>
   );
 };
