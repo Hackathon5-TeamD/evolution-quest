@@ -6,7 +6,7 @@ type Props = {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   fetch: (page: number) => Promise<void>;
-  setReady: React.Dispatch<React.SetStateAction<boolean>>;
+
   timesFetchedArr2: number;
   setTimesFetchedArr2: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -16,7 +16,7 @@ export const TableFooter: VFC<Props> = (props: Props) => {
     currentPage,
     setCurrentPage,
     fetch,
-    setReady,
+
     timesFetchedArr2,
     setTimesFetchedArr2,
   } = props;
@@ -24,7 +24,6 @@ export const TableFooter: VFC<Props> = (props: Props) => {
   const onClickNext = () => {
     setCurrentPage(() => 2);
     if (timesFetchedArr2 === 0) {
-      setReady(false);
       fetch(2);
     }
 

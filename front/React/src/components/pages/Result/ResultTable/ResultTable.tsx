@@ -10,7 +10,6 @@ type Props = {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   fetch: (page: number) => Promise<void>;
-  setReady: React.Dispatch<React.SetStateAction<boolean>>;
   timesFetchedArr2: number;
   setTimesFetchedArr2: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -21,7 +20,6 @@ export const RankingTable = (props: Props) => {
     currentPage,
     setCurrentPage,
     fetch,
-    setReady,
     timesFetchedArr2,
     setTimesFetchedArr2,
   } = props;
@@ -46,7 +44,6 @@ export const RankingTable = (props: Props) => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           fetch={fetch}
-          setReady={setReady}
           timesFetchedArr2={timesFetchedArr2}
           setTimesFetchedArr2={setTimesFetchedArr2}
         />
