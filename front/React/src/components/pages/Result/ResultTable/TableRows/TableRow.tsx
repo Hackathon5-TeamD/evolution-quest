@@ -1,17 +1,16 @@
 import { Table } from "semantic-ui-react";
+import { mockData } from "../../../../../types/ResultType";
 import styles from "./TableRow.module.css";
 
 type Props = {
   idx: number;
-  user_name: string;
-  played_at: Date;
-  accuracy: number;
-  wpm: number;
   currentPage: number;
+  data: mockData;
 };
 
 export const TableRow = (props: Props) => {
-  const { idx, user_name, played_at, accuracy, wpm, currentPage } = props;
+  const { idx, currentPage, data } = props;
+  const { id, user_name, played_at, accuracy, wpm } = data;
 
   return (
     <Table.Row>
