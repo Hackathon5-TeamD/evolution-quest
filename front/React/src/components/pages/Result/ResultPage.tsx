@@ -7,15 +7,7 @@ import styles from "./ResultPage.module.css";
 
 import { useEffect, useState } from "react";
 import { getRanking } from "../../../api/GetDataAPI";
-
-type mockData = {
-  id: number;
-  user_id: number;
-  user_name: string;
-  played_at: Date;
-  accuracy: number;
-  wpm: number;
-};
+import { mockData } from "../../../types/ResultType";
 
 export const ResultPage = () => {
   const [rankingArr1, setRankingArr1] = useState<mockData[]>([]);

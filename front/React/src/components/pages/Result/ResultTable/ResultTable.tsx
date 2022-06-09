@@ -3,15 +3,10 @@ import styles from "./ResultTable.module.css";
 import { TableHeader } from "./TableHeader/TableHeader";
 import { TableRow } from "./TableRows/TableRow";
 import { TableFooter } from "./TableFooter/TableFooter";
+import { mockData } from "../../../../types/ResultType";
 
 type Props = {
-  rankingArr: Array<{
-    id: number;
-    user_name: string;
-    played_at: Date;
-    accuracy: number;
-    wpm: number;
-  }>;
+  rankingArr: mockData[];
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   fetch: (page: number) => Promise<void>;
@@ -31,8 +26,6 @@ export const RankingTable = (props: Props) => {
     setTimesFetchedArr2,
   } = props;
 
-  const index: number = currentPage === 1 ? 1 : 11;
-
   return (
     <div className={styles.tableContainer}>
       <Table singleLine className={styles.table}>
@@ -43,11 +36,8 @@ export const RankingTable = (props: Props) => {
               <TableRow
                 key={row.id}
                 idx={idx}
-                user_name={row.user_name}
-                played_at={row.played_at}
-                accuracy={row.accuracy}
-                wpm={row.wpm}
                 currentPage={currentPage}
+                data={row}
               />
             );
           })}
