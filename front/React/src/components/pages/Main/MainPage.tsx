@@ -47,7 +47,7 @@ export const MainPage = () => {
   let flooredAccuracy = Math.floor(accuracy * 10) / 10;
 
   // WPM計算
-  const sec = getDuration() / 1000;
+  const sec = parseFloat((getDuration() / 1000).toFixed(2));
   let wpm = Math.floor(((correctChar + errorChar) / sec) * 60);
 
   useEffect(() => {

@@ -9,6 +9,7 @@ type Props = {
 
 export const Modal = (props: Props) => {
   const { accuracy, wpm, durationTime } = props;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.modalContent}>
