@@ -6,8 +6,10 @@ const Url = `http://localhost:3001`;
 export const useGame = () => {
   const [jaTerm, setJaTerm] = useState("");
   const [roTerm, setRoTerm] = useState("");
+  const [isAlertLoading, setAlsertLoading] = useState(false);
 
   const fetchGame = () => {
+    setAlsertLoading(true);
     axios
       .get(`${Url}/terminologie`)
       .then((res) => {
@@ -19,7 +21,15 @@ export const useGame = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setAlsertLoading(false);
       });
   };
-  return { jaTerm, roTerm, fetchGame };
+  return { jaTerm, roTerm, fetchGame, isAlertLoading, setAlsertLoading };
 };
+
+// export const StartGame = () => {
+
+//   return {}
+// }

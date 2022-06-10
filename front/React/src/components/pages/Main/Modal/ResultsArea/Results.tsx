@@ -6,10 +6,13 @@ type Props = {
   accuracy: number;
   wpm: number;
   durationTime: number;
+  setAlertOn: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchGameData: () => void;
 };
 
 export const Results = (props: Props) => {
-  const { accuracy, wpm, durationTime } = props;
+  const { accuracy, wpm, durationTime, setAlertOn, fetchGameData } = props;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.resultArea}>
@@ -21,8 +24,15 @@ export const Results = (props: Props) => {
         <Button
           buttonName={"Another Game"}
           description={"or press Enter to restart"}
+          setAlertOn={setAlertOn}
+          fetchGameData={fetchGameData}
         />
-        <Button buttonName={"Finish"} description={"to go back to main"} />
+        <Button
+          buttonName={"Finish"}
+          description={"to go back to main"}
+          setAlertOn={setAlertOn}
+          fetchGameData={fetchGameData}
+        />
       </div>
     </div>
   );

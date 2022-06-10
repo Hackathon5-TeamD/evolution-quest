@@ -12,15 +12,11 @@ import { StartAlert } from "./StartAlert/StartAlert";
 export const MainPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isAlertOn, setAlertOn] = useState(true);
-  const { jaTerm, roTerm, fetchGame } = useGame();
+  const { jaTerm, roTerm, fetchGame, isAlertLoading, setAlsertLoading } =
+    useGame();
   const fetchGameData = () => fetchGame();
   const { time } = useTimer();
   // console.log(time);
-
-  const fetch = async () => {
-    const res = await fetchGameData();
-    insertTyping();
-  };
 
   // Call the hook
   const {
@@ -48,7 +44,7 @@ export const MainPage = () => {
 
   // WPM計算
   const sec = parseFloat((getDuration() / 1000).toFixed(2));
-  let wpm = Math.floor(((correctChar + errorChar) / sec) * 60);
+  let wpm = Math.floor((correctChar / sec) * 60);
 
   useEffect(() => {
     if (phase === 2) {
@@ -70,9 +66,19 @@ export const MainPage = () => {
       />
       <RecordArea accuracy={flooredAccuracy} wpm={wpm} />
       {isModalOpen && (
-        <Modal accuracy={flooredAccuracy} wpm={wpm} durationTime={sec} />
+        <Modal
+          accuracy={flooredAccuracy}
+          wpm={wpm}
+          durationTime={sec}
+          setAlertOn={setAlertOn}
+          fetchGameData={fetchGameData}
+        />
       )}
-      {isAlertOn && <StartAlert setAlertOn={setAlertOn} />}
+      {isAlertOn && (
+        <StartAlert setAlertOn={setAlertOn}>
+          Press Tab Button to start
+        </StartAlert>
+      )}
     </div>
   );
 };
