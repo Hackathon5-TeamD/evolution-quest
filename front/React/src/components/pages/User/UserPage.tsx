@@ -4,7 +4,24 @@ import { GameRecord } from "./GameRecord/GameRecord";
 import { SideBar } from "../SideBar/SideBar";
 import styles from "./UserPage.module.css";
 
+import { useEffect, useState } from "react";
+import { getUserRecord } from "../../../api/GetDataAPI";
+import { recordData } from "../../../types/UserType";
+
 export const UserPage = () => {
+  const [recordArr, setRecordArr] = useState<recordData[]>([]);
+
+  // サーバーにユーザーデータ配列を取りに行く関数
+  const fetch = async () => {
+    const res = await getUserRecord();
+    // サーバーから取ってきたユーザーデータ配列をページごとに違うstate(配列)に入れる
+    setRecordArr(res);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <div id="outer-container" className={styles.wrapper}>
       <div>
@@ -15,8 +32,15 @@ export const UserPage = () => {
         <div id="page-wrap">
           <div className={styles.container}>
             <Header />
-            <SubTitle />
-            <GameRecord />
+
+            {recordArr.length !== 0 ? (
+              <>
+                <SubTitle>User name : {recordArr[0]["user_name"]}</SubTitle>
+                <GameRecord recordArr={recordArr} />
+              </>
+            ) : (
+              <h1>Loading...</h1>
+            )}
           </div>
         </div>
       </div>

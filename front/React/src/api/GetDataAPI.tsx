@@ -9,3 +9,12 @@ export const getRanking = async (page: number) => {
     console.log(err);
   }
 };
+
+export const getUserRecord = async () => {
+  try {
+    const res = await axios.get(`${Url}/record`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

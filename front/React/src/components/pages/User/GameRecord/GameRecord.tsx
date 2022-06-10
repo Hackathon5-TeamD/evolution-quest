@@ -1,11 +1,17 @@
 import styles from "./GameRecord.module.css";
 import { GameRecordTable } from "./Table/Table";
+import { recordData } from "../../../../types/UserType";
 
-export const GameRecord = () => {
+type Props = {
+  recordArr: recordData[];
+};
+
+export const GameRecord = (props: Props) => {
+  const { recordArr } = props;
   return (
     <div className={styles.container}>
       <p className={styles.title}>Games History</p>
-      <GameRecordTable />
+      <GameRecordTable recordArr={recordArr} />
     </div>
   );
 };
