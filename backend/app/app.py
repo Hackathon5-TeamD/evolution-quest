@@ -1,6 +1,6 @@
 from flask import Flask
 
-# モジュールのインポート
+# # モジュールのインポート
 from main import main_module
 from user import user_module
 from terminologie import terminologie_module
@@ -8,7 +8,7 @@ from result import result_module
 
 app = Flask(__name__)
 
-# コントローラー先
+# # コントローラー先
 app.register_blueprint(main_module)
 app.register_blueprint(user_module)
 app.register_blueprint(terminologie_module)

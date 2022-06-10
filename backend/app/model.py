@@ -1,11 +1,9 @@
 import os
+from app import app
 
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 base_dir = os.path.dirname(__file__)
-
-app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     base_dir, "data.sqlite"
@@ -23,7 +21,6 @@ class Person(db.Model):
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
 
-
 class Terminologie(db.Model):
     __tablename__ = "terminologies"
     terminologie_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -38,6 +35,6 @@ class Result(db.Model):
     __tablename__ = "results"
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer)
-    accuracy_value = db.Column(db.Integer)
-    wpm = db.Column(db.Integer)
+    accuracy_value = db.Column(db.Float)
+    wpm = db.Column(db.Float)
     playd_at_date = db.Column(db.DateTime)
