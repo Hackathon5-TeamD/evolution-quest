@@ -1,6 +1,5 @@
 import os
-
-from flask import Flask, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 base_dir = os.path.dirname(__file__)
