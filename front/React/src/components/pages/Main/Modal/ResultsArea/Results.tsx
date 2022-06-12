@@ -16,7 +16,12 @@ export const Results = (props: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.resultArea}>
-        <ResultItem name={"Time"} data={durationTime} notation={"seconds"} />
+        <ResultItem
+          name={"Time"}
+          data={durationTime}
+          notation={"s"}
+          description={"1文字目から終了までの秒数です。"}
+        />
         <ResultItem name={"Accuracy"} data={accuracy} notation={"%"} />
         <ResultItem name={"Average WPM"} data={wpm} notation={"wpm"} />
       </div>
