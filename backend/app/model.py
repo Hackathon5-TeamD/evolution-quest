@@ -1,7 +1,10 @@
 import os
-from app import app
 
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
+# appにおいておくと循環エラー出るのでこちらに
+app = Flask(__name__)
 
 base_dir = os.path.dirname(__file__)
 
@@ -30,7 +33,12 @@ class Terminologie(db.Model):
     description_ja = db.Column(db.Text)
     description_ro = db.Column(db.Text)
 
+class Genre(db.Model):
+    __tablename__ ="genres"
+    genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    genre = db.Column(db.String(255))
 
+# 小数点以下が入るとのことでaccuracy_valueとwpmをFloatに変更
 class Result(db.Model):
     __tablename__ = "results"
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)

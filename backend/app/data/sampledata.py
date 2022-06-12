@@ -1,0 +1,13 @@
+# ユーザーデータサンプル
+sampleusers = [
+    { "user_name" : "山田長政", "password" : "test1"},
+    { "user_name" : "浅井長政", "password" : "test2"},
+    { "user_name" : "滝廉太郎", "password" : "test3"},
+]
+
+# リザルトサンプル
+samplresults = [
+    { "user_id" : 1, "accuracy_value" : 98.2, "wpm" : 100.9, "playd_at_date" : "2022-06-10 12:34:56"},
+    { "user_id" : 2, "accuracy_value" : 97.4, "wpm" : 117.2, "playd_at_date" : "2022-06-11 12:34:56"},
+    { "user_id" : 3, "accuracy_value" : 96.3, "wpm" : 105.3, "playd_at_date" : "2022-06-12 12:34:56"},
+]
