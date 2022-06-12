@@ -6,15 +6,16 @@ import { Time } from "./time/Time";
 type Props = {
   accuracy: number;
   wpm: number;
+  dateString: string;
 };
 
 export const RecordArea = (props: Props) => {
-  const { accuracy, wpm } = props;
+  const { accuracy, wpm, dateString } = props;
   return (
     <div className={styles.recordArea}>
       <Accuracy accuracy={accuracy} />
       <Wpm wpm={wpm} />
-      <Time />
+      <Time dateString={dateString} />
     </div>
   );
 };

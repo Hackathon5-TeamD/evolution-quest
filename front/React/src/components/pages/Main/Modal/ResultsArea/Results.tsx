@@ -20,7 +20,7 @@ export const Results = (props: Props) => {
           name={"Time"}
           data={durationTime}
           notation={"s"}
-          description={"1文字目から終了までの秒数です。"}
+          description={"入力し始めてから終了までの秒数です。"}
         />
         <ResultItem name={"Accuracy"} data={accuracy} notation={"%"} />
         <ResultItem name={"Average WPM"} data={wpm} notation={"wpm"} />

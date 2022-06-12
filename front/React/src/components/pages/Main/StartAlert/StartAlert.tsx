@@ -8,14 +8,6 @@ type Props = {
 
 export const StartAlert = (props: Props) => {
   const { setAlertOn, children } = props;
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Tab") {
-      setAlertOn(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown, false);
-  }, []);
 
   return (
     <div className={styles.alertWrapper}>
