@@ -4,14 +4,21 @@ type Props = {
   name: String;
   data: Number;
   notation: String;
+  description?: string;
 };
 
 export const ResultItem = (props: Props) => {
-  const { name, data, notation } = props;
+  const { name, data, notation, description } = props;
+  const currentDate = new Date();
+
   return (
-    <p className={styles.item}>
-      {name} <span className={styles.span}>{data}</span>
-      {notation}
-    </p>
+    <div className={styles.div}>
+      <div className={styles.itemWrapper}>
+        <p className={styles.item}>{name}</p>
+        <span className={styles.span}>{data} </span>
+        {notation}
+      </div>
+      <p className={styles.description}>{description}</p>
+    </div>
   );
 };
