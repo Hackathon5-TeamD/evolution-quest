@@ -28,13 +28,11 @@ export const Button = (props: Props) => {
   const onClickKeyDown = () => {
     // setAlertOn(true);
     fetchGameData();
-    console.log("モーダルを開いて新しいゲーム開始！");
     window.location.reload();
   };
 
   // finishボタンを押した時の処理
   const finishGame = () => {
-    console.log("終わり");
     navigation("/");
   };
 

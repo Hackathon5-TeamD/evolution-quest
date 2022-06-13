@@ -1,6 +1,6 @@
 import styles from "../recordItems.module.css";
 
-export const Accuracy = ({ accuracy }) => {
+export const Accuracy = ({ accuracy }: { accuracy: number }) => {
   return (
     <div className={styles.recordItem}>
       <p>Accuracy</p>

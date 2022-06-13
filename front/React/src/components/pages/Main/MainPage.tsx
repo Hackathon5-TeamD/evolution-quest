@@ -62,7 +62,7 @@ export const MainPage = () => {
     clearInterval(intervalId);
   };
 
-  const startTimer = (starttime) => {
+  const startTimer = (starttime: number) => {
     removeTabListener();
 
     const timer = setInterval(() => {
