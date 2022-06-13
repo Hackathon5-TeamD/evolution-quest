@@ -9,7 +9,7 @@ export const postGameData = async (result: {
   const data = {
     accuracy_value: accuracy,
     wpm: wpm,
-    "played_at date": Date.now(),
+    played_at: Date.now(),
   };
   try {
     const res = await axios.post(`${Url}/result`, data);
