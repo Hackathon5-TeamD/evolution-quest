@@ -5,6 +5,7 @@ app.config['JSON_AS_ASCII'] = False
 
 user_module = Blueprint("user_module", __name__, url_prefix="/user")
 
+# User全てをJSONで取得
 @user_module.route("/")
 def user():
     persons = Person.query.all()
