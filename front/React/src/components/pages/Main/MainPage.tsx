@@ -7,6 +7,7 @@ import useTypingGame from "react-typing-game-hook";
 import { useGame } from "../../../hooks/useGame";
 import { useState, useEffect } from "react";
 import { StartAlert } from "./StartAlert/StartAlert";
+import { postGameData } from "../../../api/postGameData";
 
 export const MainPage = () => {
   // state
@@ -22,7 +23,7 @@ export const MainPage = () => {
 
   //-------------------------  タイピングhooks関連  ------------------------------------
   const {
-    // phase : {0:ミスタート,　1:　入力中,　2:終わり}
+    // phase : { 0:ミスタート, 1:入力中, 2:終わり }
     states: { chars, charsState, correctChar, errorChar, phase },
     // getDuration() : スタートから現在打ってる文字までにかかった秒数(ミリ秒)
     actions: { insertTyping, resetTyping, deleteTyping, getDuration },
@@ -36,9 +37,11 @@ export const MainPage = () => {
     fetchGameData();
   }, []);
 
-  // ミリ秒数： getDuration()
-  // 正解数: correctChar
-  // ミスタイプ: errorChar
+  /**
+   * ミリ秒数： getDuration()
+   * 正解数: correctChar
+   * ミスタイプ: errorChar
+   */
 
   // accuracy計算
   let accuracy = (correctChar / (correctChar + errorChar)) * 100;
@@ -48,15 +51,26 @@ export const MainPage = () => {
   const sec = parseFloat((getDuration() / 1000).toFixed(2));
   let wpm = Math.floor((correctChar / sec) * 60);
 
-  //-------------------------　タイマー関連　------------------------------------
+  //-------------------------  ゲーム終了時の処理  ----------------------------------
 
   // 文章を全て入力し終えたらゲームを終了させモーダルを表示、タイマーを停止
   useEffect(() => {
     if (phase === 2) {
       setModalOpen(true);
       stopTimer();
+      // accuracy, wpmを小数点第1位までのnumberに変換
+      const convertedAccuracy = parseFloat(accuracy.toFixed(1));
+      // accuracy, wpmをオブジェクトにしてaxiosでサーバーにpostする
+      // user_idも後で付け足してね！
+      const result = {
+        accuracy: convertedAccuracy, // float
+        wpm: wpm, // int
+      };
+      postGameData(result);
     }
   }, [phase]);
+
+  //-------------------------  タイマー関連  ----------------------------------
 
   const stopTimer = () => {
     clearInterval(intervalId);
