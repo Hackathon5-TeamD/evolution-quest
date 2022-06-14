@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, redirect, render_template, request
 from model import app, Terminologie, db
 
-app.config['JSON_AS_ASCII'] = False
+app.config["JSON_AS_ASCII"] = False
 
 terminologie_module = Blueprint("terminologie_module", __name__)
 create_module = Blueprint("create_module", __name__, template_folder="templates")
 update_module = Blueprint("update_module", __name__, template_folder="templates")
+delete_module = Blueprint("delete_module", __name__)
 
 # 用語全てをJSONで取得
 @terminologie_module.route("/terminologie/", methods=["GET"])
@@ -49,7 +50,7 @@ def create():
 def update(terminologie_id):
     term = Terminologie.query.get(terminologie_id)
     if request.method == "GET":
-        return render_template('update.html', term=term)
+        return render_template("update.html", term=term)
     else:
         term.genre_id = request.form.get("genre_id")
         term.theme_jp = request.form.get("theme_jp")
@@ -59,3 +60,13 @@ def update(terminologie_id):
                 
         db.session.commit()
         return "用語の編集が完了しました"
+
+# 用語の削除（問答無用で削除されます）
+@delete_module.route("/delete/<int:terminologie_id>", methods=["GET", "POST"])
+# @login_required
+def delete(terminologie_id):
+    post = Terminologie.query.get(terminologie_id)
+    
+    db.session.delete(post)
+    db.session.commit()
+    return "用語が削除されました"
