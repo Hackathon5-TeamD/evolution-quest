@@ -3,12 +3,19 @@ import { Accuracy } from "./accuracy/Accuracy";
 import { Wpm } from "./wpm/Wpm";
 import { Time } from "./time/Time";
 
-export const RecordArea = () => {
+type Props = {
+  accuracy: number;
+  wpm: number;
+  dateString: string;
+};
+
+export const RecordArea = (props: Props) => {
+  const { accuracy, wpm, dateString } = props;
   return (
     <div className={styles.recordArea}>
-      <Accuracy />
-      <Wpm />
-      <Time />
+      <Accuracy accuracy={accuracy} />
+      <Wpm wpm={wpm} />
+      <Time dateString={dateString} />
     </div>
   );
 };

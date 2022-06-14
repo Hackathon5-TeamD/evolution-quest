@@ -12,7 +12,6 @@ type Props = {
 export const Button: FC<Props> = memo((props) => {
   const { children, icon, linkTo } = props;
   const navigation = useNavigate();
-  console.log("ボタン再レンダリング");
 
   return (
     <button className={styles.menuItem} onClick={() => navigation(linkTo)}>
