@@ -10,7 +10,7 @@ delete_module = Blueprint("delete_module", __name__)
 
 # 用語全てをJSONで取得
 @terminologie_module.route("/terminologie/", methods=["GET"])
-def term():
+def terms():
     terms = Terminologie.query.all()
     data = [
         {
@@ -24,6 +24,22 @@ def term():
         for i in terms
     ]
     
+    return jsonify(data) 
+
+# 用語を１つだけJSONで取得
+@terminologie_module.route("/terminologie/<int:terminologie_id>", methods=["GET"])
+def term(terminologie_id):
+    term = Terminologie.query.get(terminologie_id)
+    data = [
+    {
+        "terminologie_id": term.terminologie_id,
+        "genre_id": term.genre_id,
+        "theme_jp": term.theme_jp,
+        "theme_ro": term.theme_ro,
+        "description_ja": term.description_ja,
+        "description_ro": term.description_ro
+    }
+    ]
     return jsonify(data) 
 
 # 用語の新規作成
