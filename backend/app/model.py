@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import pytz
 from flask_migrate import Migrate
 
 base_dir = os.path.dirname(__file__)
@@ -43,7 +44,8 @@ class Result(db.Model):
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer)
     accuracy_value = db.Column(db.Integer)
-    wpm = db.Column(db.Integer)
-    playd_at_date = db.Column(db.DateTime,default=datetime.now)
+    wpm = db.Column(db.String)
+    playd_at_date = db.Column(db.String)
+    # playd_at_date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo'))
     
 db.create_all()
