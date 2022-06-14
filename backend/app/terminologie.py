@@ -5,6 +5,7 @@ app.config['JSON_AS_ASCII'] = False
 
 terminologie_module = Blueprint("terminologie_module", __name__)
 create_module = Blueprint("create_module", __name__, template_folder="templates")
+update_module = Blueprint("update_module", __name__, template_folder="templates")
 
 # 用語全てをJSONで取得
 @terminologie_module.route("/terminologie/", methods=["GET"])
@@ -24,9 +25,8 @@ def term():
     
     return jsonify(data) 
 
-# 記事の新規作成
+# 用語の新規作成
 @create_module.route("/create", methods=["GET", "POST"])
-# @login_required
 def create():
     if request.method == "POST":
         genre_id = request.form.get("genre_id")
@@ -43,3 +43,19 @@ def create():
         return redirect("/create")
     else:
         return render_template("create.html")
+    
+# 用語の編集
+@update_module.route("/update/<int:terminologie_id>", methods=["GET", "POST"])
+def update(terminologie_id):
+    term = Terminologie.query.get(terminologie_id)
+    if request.method == "GET":
+        return render_template('update.html', term=term)
+    else:
+        term.genre_id = request.form.get("genre_id")
+        term.theme_jp = request.form.get("theme_jp")
+        term.theme_ro = request.form.get("theme_ro")
+        term.description_ja = request.form.get("description_ja")
+        term.description_ro = request.form.get("description_ro")
+                
+        db.session.commit()
+        return redirect("/update/<int:terminologie_id>")
