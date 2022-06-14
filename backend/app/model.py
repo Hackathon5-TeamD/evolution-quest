@@ -3,9 +3,10 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-base_dir = os.path.dirname(__file__)
-
+# appにおいておくと循環エラー出るのでこちらに
 app = Flask(__name__)
+
+base_dir = os.path.dirname(__file__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     base_dir, "data.sqlite"
@@ -23,7 +24,6 @@ class Person(db.Model):
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
 
-
 class Terminologie(db.Model):
     __tablename__ = "terminologies"
     terminologie_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -33,11 +33,16 @@ class Terminologie(db.Model):
     description_ja = db.Column(db.Text)
     description_ro = db.Column(db.Text)
 
+class Genre(db.Model):
+    __tablename__ ="genres"
+    genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    genre = db.Column(db.String(255))
 
+# 小数点以下が入るとのことでaccuracy_valueとwpmをFloatに変更
 class Result(db.Model):
     __tablename__ = "results"
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer)
-    accuracy_value = db.Column(db.Integer)
-    wpm = db.Column(db.Integer)
+    accuracy_value = db.Column(db.Float)
+    wpm = db.Column(db.Float)
     playd_at_date = db.Column(db.DateTime)
