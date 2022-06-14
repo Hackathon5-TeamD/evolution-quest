@@ -1,9 +1,9 @@
 import csv
 
-from data.sampledata import sampleusers, samplresults
+from data.sampledata import sampleusers, sampleresults
 from model import Terminologie, Person, Result, db
 
-# DBの初期化,terminologiesの初期データを挿入する
+# DBの初期化,各テーブルの初期データを挿入する
 
 def insert_user():
     """
@@ -21,14 +21,14 @@ def insert_result():
     """
     サンプルリザルトデータをコンテナ立ち上げ時に挿入する. ※おそらくDateTimeの問題で挿入できていない
     """
-    for i in samplresults:
-        u  = Result(
+    for i in sampleresults:
+        r  = Result(
             user_id=i["user_id"],
             accuracy_value=i["accuracy_value"],
             wpm=i["wpm"],
             playd_at_date=i["playd_at_date"]
             )
-        db.session.add(u)
+        db.session.add(r)
     db.session.commit()
 
 def insert_terminologie():
