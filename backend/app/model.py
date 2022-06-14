@@ -45,7 +45,7 @@ class Result(db.Model):
     user_id = db.Column(db.Integer)
     accuracy_value = db.Column(db.Integer)
     wpm = db.Column(db.String)
-    playd_at_date = db.Column(db.String)
+    playd_at_date = db.Column(db. DateTime)
     # playd_at_date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo'))
     
 db.create_all()

@@ -6,7 +6,7 @@ content-type: application/json
     "user_id": 333333,
     "accuracy_value": 555555,
     "wpm": 7777777,
-     "playd_at_date": "2022/06/13"
+     "playd_at_date": "2022-06-13"
  }
 
 ###
