@@ -26,18 +26,17 @@ services:
     networks:
       - front_network
 
-
   flask:
     container_name: flask
     depends_on:
       - db
-    build: ./backend
+    build: ./backend/flask_app
     ports:
       - "5001:5000"
     volumes:
-      - ./backend/app:/usr/src/app:cached
+      - ./backend/flask_app/app:/usr/src/app:cached
       # - ./backend/DB:/usr/src/db:cached
-      - ./backend/scripts:/usr/src/scripts:cached
+      - ./backend/flask_app/scripts:/usr/src/scripts:cached
     working_dir: /usr/src/scripts
     command: bash -c "./run.sh"
     networks:
@@ -56,8 +55,7 @@ services:
     expose:
       - "3306"
     volumes:
-      - ./backend/DB/conf.d:/etc/mysql/conf.d:cached
-      - ./backend/DB/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+      - ./backend/DB/docker-entrypoint:/docker-entrypoint-initdb.d
       - ./log/db:/var/log/mysql:cached
     networks:
       - backend_network
@@ -79,6 +77,9 @@ services:
       - ./phpmyadmin/sessions:/sessions
     networks:
       - backend_network
+
+  web:
+    
 
 networks:
   # default:
