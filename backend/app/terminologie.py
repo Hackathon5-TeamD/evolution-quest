@@ -58,4 +58,4 @@ def update(terminologie_id):
         term.description_ro = request.form.get("description_ro")
                 
         db.session.commit()
-        return redirect("/update/<int:terminologie_id>")
+        return "用語の編集が完了しました"
