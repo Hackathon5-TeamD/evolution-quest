@@ -30,15 +30,22 @@ services:
     container_name: flask
     depends_on:
       - db
-    build: ./backend/flask_app
+    build:
+      context: .
+      dockerfile: ./backend/flask_app/Dockerfile
     ports:
-      - "5001:5000"
+      - "5001:5001"
+      expose:
+      - "5001"
     volumes:
-      - ./backend/flask_app/app:/usr/src/app:cached
+      # - ./backend/flask_app/app:/usr/src/app:cached
+      - ./backend/flask_app:/usr/src/app:cached
       # - ./backend/DB:/usr/src/db:cached
-      - ./backend/flask_app/scripts:/usr/src/scripts:cached
-    working_dir: /usr/src/scripts
-    command: bash -c "./run.sh"
+      # - ./backend/flask_app/scripts:/usr/src/scripts:cached
+      - socket:/tmp
+      # - ./front/React/build:/usr/share/nginx/html
+    working_dir: /usr/src/app
+    command: bash -c "./scripts/run.sh"
     networks:
       - backend_network
     environment:
@@ -49,7 +56,9 @@ services:
       
   db:
     container_name: mysql_db
-    build: ./backend/DB
+    build:
+      context: .
+      dockerfile: ./backend/DB/Dockerfile
     restart: always
     tty: true
     expose:
@@ -79,7 +88,22 @@ services:
       - backend_network
 
   web:
-    
+    container_name: nGinX
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/conf.d/
+      - socket:/tmp
+      - ./front/React/build:/usr/share/nginx/html
+      - "/log/nginx_log:/var/log/nginx"
+    links:
+      - flask
+
+volumes:
+  socket:
 
 networks:
   # default:

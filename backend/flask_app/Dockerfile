@@ -9,11 +9,12 @@ WORKDIR /usr/src/app
 
 ENV FLASK_APP=app
 
-COPY requirements.txt .
+# COPY ./backend/flask_app/requirements.txt .
+# COPY . .
 
 RUN pip install --upgrade pip \
     && pip install --trusted-host pypi.python.org -r requirements.txt
 
 # COPY ./app /usr/src
-
-# CMD [ "python", "app.py" ]
+  
+CMD [ "uwsgi", "--ini", "/usr/src/app/app/uwsgi.ini" ]

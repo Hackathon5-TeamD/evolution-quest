@@ -13,7 +13,7 @@ RUN sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen\
     
 ENV LANG ja_JP.UTF-8
 
-COPY ./conf/my.cnf /etc/mysql/conf.d/my.cnf
+COPY ./backend/DB/conf/my.cnf /etc/mysql/conf.d/my.cnf
 # COPY ./docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 
 # WORKDIR /etc/mysql/conf.d
