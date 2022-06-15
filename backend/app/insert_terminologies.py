@@ -19,7 +19,7 @@ def insert_user():
 
 def insert_result():
     """
-    サンプルリザルトデータをコンテナ立ち上げ時に挿入する. ※おそらくDateTimeの問題で挿入できていない
+    サンプルリザルトデータをコンテナ立ち上げ時に挿入する.
     """
     for i in sampleresults:
         r  = Result(
