@@ -5,7 +5,7 @@ from datetime import datetime
 import pytz
 from flask_migrate import Migrate
 from flask_login import UserMixin, LoginManager
-from flask_bcrypt import generate_password_hash, check_password_hash
+
 
 login_manager = LoginManager()
 # login_manager.login_view = 'app.login'
@@ -26,7 +26,7 @@ Migrate(app, db)
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
 # class Person(UserMixin, db.Model):
-class Person(db.Model):
+class Person(UserMixin,db.Model):
     
     __tablename__ = "users"
 

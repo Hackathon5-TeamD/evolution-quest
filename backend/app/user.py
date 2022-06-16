@@ -41,21 +41,20 @@ def post_user():
     db.session.commit()
     return payload
 
-
-# class UserSchema(ma.Schema):   
-#     class Meta:    
-#         fields = ('id','user_name','password')
-
-
-# user_schema = UserSchema()
-# users_schema = UserSchema(many=True)
-
-
-# @user_module.route("/user", methods=["GET"])
-# def get_user():
-#    all_users = Person.query.all()
-
-#    return users_schema.jsonify(all_users)
-
+@user_module.route('/login',methods=["POST"])
+def login_user():
+    payload = request.json
+    insert_data = Person(
+        user_id = payload.get("user_id"),
+        user_name = payload.get("user_name"),
+        password = generate_password_hash(payload.get("password"))
+        )
+    user = Person.query.filter_by(user_name=payload.get("user_name")).first() and Person.query.filter_by(password= generate_password_hash(payload.get("password")))
+    
+    if user: # if a user is found, we want to redirect back to signup page so user can try again
+        return "loginしたよ"
+    else:
+        return "nameかpass違うよ"
+    
 
 
