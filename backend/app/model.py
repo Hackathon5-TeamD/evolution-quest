@@ -22,7 +22,7 @@ Migrate(app, db)
 class Person(db.Model):
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
 
@@ -42,10 +42,10 @@ class Result(db.Model):
     __tablename__ = "results"
     
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer)#forリンキー
     accuracy_value = db.Column(db.Integer)
     wpm = db.Column(db.String)
-    playd_at_date = db.Column(db. DateTime)
+    playd_at_date = db.Column(db. String)
     # playd_at_date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo'))
     
 db.create_all()

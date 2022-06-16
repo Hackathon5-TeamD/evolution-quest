@@ -12,12 +12,12 @@ app.config['JSON_AS_ASCII'] = False
 user_module = Blueprint("user_module", __name__, url_prefix="/user")
 
 # User全てをJSONで取得
-@user_module.route("/")
+@user_module.route("")
 def user():
     persons = Person.query.all()
     data = [
         {
-            "id": i.id,
+            "user_id": i.user_id,
             "user_name": i.user_name,
             "password": i.password
         }
@@ -26,11 +26,11 @@ def user():
     
     return jsonify(data) 
 
-@user_module.route('/user',methods=["POST"])
+@user_module.route('',methods=["POST"])
 def post_user():
     payload = request.json
     insert_data = Person(
-        id = payload.get("id"),
+        user_id = payload.get("user_id"),
         user_name = payload.get("user_name"),
         password = payload.get("password")
     )

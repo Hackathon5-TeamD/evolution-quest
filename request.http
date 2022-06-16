@@ -2,19 +2,31 @@ POST http://localhost:5000/result HTTP/1.1
 content-type: application/json
 
 {
-    "result_id": 111111,
-    "user_id": 333333,
-    "accuracy_value": 555555,
-    "wpm": 7777777,
-     "playd_at_date": "2022-06-13"
+    "result_id": 12345,
+    "user_id": 3,
+    "accuracy_value": 4567,
+    "wpm": 11,
+     "playd_at_date": "2022-07-10"
  }
+
+###
+GET http://localhost:5000/result HTTP/1.1
+###
+GET http://localhost:5000/result/user HTTP/1.1
+
+###
+GET http://localhost:5000/result/1 HTTP/1.1
+###
+GET http://localhost:5000/result/2 HTTP/1.1
+
+
 
 ###
 POST http://localhost:5000/user HTTP/1.1
 content-type: application/json
 
 {
-    "id": 333333,
+    "user_id": 555,
     "user_name": "school",
     "password": "ProtoOu"
 }
