@@ -4,6 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pytz
 from flask_migrate import Migrate
+from flask_login import UserMixin, LoginManager
+from flask_bcrypt import generate_password_hash, check_password_hash
+
+login_manager = LoginManager()
+# login_manager.login_view = 'app.login'
+# login_manager.login_message = 'ログインしてください'
 
 base_dir = os.path.dirname(__file__)
 
@@ -19,12 +25,20 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
+# class Person(UserMixin, db.Model):
 class Person(db.Model):
+    
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
+    
+    # def __int__(self, password):
+    #     self.password = generate_password_hash(password)
+        
+    # def valiate_password(self,password):
+    #     return check_password_hash(self.password,password)
 
 
 class Terminologie(db.Model):
