@@ -4,15 +4,26 @@ import { Input, Button } from "semantic-ui-react";
 import { Title } from "../Login/Title/Title";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { atom, useSetRecoilState } from "recoil";
 // サインアップとは、会員登録のこと。このページでは会員登録のロジックを書く。
 
 // バックエンドからのレスポンスの型定義
 type User = {
   user_id: number;
   user_name: string;
-  joined_date: Date;
+  // joined_date: Date;
   token: string;
 };
+
+// atomの初期値
+export const userLoginState = atom<User>({
+  key: "userLoginState",
+  default: {
+    user_id: 0,
+    user_name: "",
+    token: "",
+  },
+});
 
 export const Register: VFC = memo(() => {
   const navigate = useNavigate();
@@ -21,8 +32,8 @@ export const Register: VFC = memo(() => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // グローバルなstate
-  // const { setUserData } = useContext(UserContext);
+  // atomの更新関数を変数へ入れる
+  const setLogin = useSetRecoilState(userLoginState);
 
   // ローディングフラグ 今回は必要ない？？？
   const [isLoading, setIsLoading] = useState(false);
@@ -81,6 +92,7 @@ export const Register: VFC = memo(() => {
         .then((result) => {
           postLoginUser()
             .then((result) => {
+              setLogin(result);
               console.log(result);
               localStorage.setItem("token", result.token);
               navigate("/gamestart");
