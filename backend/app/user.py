@@ -45,7 +45,7 @@ def post_user():
 def login_user():
     payload = request.json
     insert_data = Person(
-        user_id = payload.get("user_id"),
+        # user_id = payload.get("user_id"),
         user_name = payload.get("user_name"),
         password = generate_password_hash(payload.get("password"))
         )

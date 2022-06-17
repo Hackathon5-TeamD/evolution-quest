@@ -26,9 +26,9 @@ POST http://localhost:5000/user HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 555,
-    "user_name": "school",
-    "password": "ProtoOu"
+    "user_id": 11,
+    "user_name": "schoollll",
+    "password": "ProtoOuooooo"
 }
 
 ###
@@ -39,8 +39,8 @@ POST http://localhost:5000/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 5555,
-    "user_name": "school",
-    "password": "ProtoOu"
+    "user_id": 5551,
+    "user_name": "schoollll",
+    "password": "ProtoOuooooo"
 }
 
