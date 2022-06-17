@@ -1,5 +1,6 @@
 import axios from "axios";
-const Url = `http://localhost:3001`;
+// const Url = `http://localhost:3001`;
+const Url = `http://localhost:5001`;
 
 export const postGameData = async (result: {
   accuracy: number;

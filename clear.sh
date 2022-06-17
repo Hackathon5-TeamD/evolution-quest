@@ -5,5 +5,6 @@ rm -rf backend/flask_app/app/venv
 rm -rf backend/flask_app/app/data.sqlite
 
 rm -rf front/React/node_modules
+rm -rf front/React/build
 
 rm -rf log

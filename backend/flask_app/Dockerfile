@@ -5,11 +5,11 @@ RUN apt update \
     && apt install --no-install-recommends -y tzdata \
     && apt clean
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/app
 
 ENV FLASK_APP=app
 
-# COPY ./backend/flask_app/requirements.txt .
+COPY ./backend/flask_app/requirements.txt .
 # COPY . .
 
 RUN pip install --upgrade pip \

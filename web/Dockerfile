@@ -1,3 +1,5 @@
-FROM nginx:latest
+FROM httpd:2.4.54-alpine3.16
 
-CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/conf.d/nginx.conf"]
+WORKDIR /usr/local/apache2
+
+COPY ./web/Apache-conf ./conf

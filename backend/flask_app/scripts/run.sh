@@ -18,6 +18,9 @@ done
 # cd /usr/src/app && gunicorn app.app:app -w 4 -k 0.0.0.0:8000
 
 echo "insert data..."
-cd /usr/src/app && python insert_terminologies.py
+cd /usr/src/app/app && python insert_terminologies.py
 echo "start app..."
-cd /usr/src/app && python -m flask run --host=0.0.0.0
+cd /usr/src/app/app && flask db init
+cd /usr/src/app/app && flask db migrate -m "db start"
+cd /usr/src/app/app && flask db upgrade
+cd /usr/src/app/app && python -m flask run --host=0.0.0.0
