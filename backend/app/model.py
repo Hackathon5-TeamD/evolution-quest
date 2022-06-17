@@ -28,11 +28,14 @@ Migrate(app, db)
 # class Person(UserMixin, db.Model):
 class Person(UserMixin,db.Model):
     
-    __tablename__ = "users"
+    __tablename__ = "person"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
+    
+    
+    result= db.relationship("Result", backref="person")
     
     # def __int__(self, password):
     #     self.password = generate_password_hash(password)
@@ -56,10 +59,13 @@ class Result(db.Model):
     __tablename__ = "results"
     
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer)#forリンキー
+    user_id = db.Column(db.Integer,db.ForeignKey('person.user_id'))#forリンキー
     accuracy_value = db.Column(db.Integer)
     wpm = db.Column(db.String)
     playd_at_date = db.Column(db. String)
+    
+    # result= db.relationship("Result", backref="person")
+    
     # playd_at_date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo'))
     
 db.create_all()
