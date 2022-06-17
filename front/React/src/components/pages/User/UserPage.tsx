@@ -24,7 +24,6 @@ export const UserPage = () => {
 
   useEffect(() => {
     fetch();
-    console.log(data);
   }, []);
 
   return (
@@ -40,7 +39,7 @@ export const UserPage = () => {
 
             {recordArr.length !== 0 ? (
               <>
-                <SubTitle>User name : {recordArr[0]["user_name"]}</SubTitle>
+                <SubTitle>User name : {data.user_name}</SubTitle>
                 <GameRecord recordArr={recordArr} />
               </>
             ) : (
