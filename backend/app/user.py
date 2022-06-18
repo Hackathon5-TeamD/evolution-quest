@@ -3,13 +3,6 @@ from flask import Blueprint, request, jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash#, Bcrypt
 
-# from flask_sqlalchemy import SQLAlchemy
-# from flask_marshmallow import Marshmallow
-# from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
-
-# user_module = Blueprint("user_module", __name__)
-# ma = Marshmallow(app)
-# bcrypt = Bcrypt(app)
 app.config['JSON_AS_ASCII'] = False
 
 user_module = Blueprint("user_module", __name__, url_prefix="/user")

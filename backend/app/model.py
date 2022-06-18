@@ -1,15 +1,12 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-import pytz
+# from datetime import datetime
+# import pytz
 from flask_migrate import Migrate
 from flask_login import UserMixin, LoginManager
 
-
 login_manager = LoginManager()
-# login_manager.login_view = 'app.login'
-# login_manager.login_message = 'ログインしてください'
 
 base_dir = os.path.dirname(__file__)
 
@@ -28,20 +25,14 @@ Migrate(app, db)
 # class Person(UserMixin, db.Model):
 class Person(UserMixin,db.Model):
     
-    __tablename__ = "person"
+    __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
     
     
-    result= db.relationship("Result", backref="person")
-    
-    # def __int__(self, password):
-    #     self.password = generate_password_hash(password)
-        
-    # def valiate_password(self,password):
-    #     return check_password_hash(self.password,password)
+    result= db.relationship("Result", backref="users")
 
 
 class Terminologie(db.Model):
@@ -54,18 +45,20 @@ class Terminologie(db.Model):
     description_ja = db.Column(db.Text)
     description_ro = db.Column(db.Text)
     
+class Genre(db.Model):
+    __tablename__ ="genres"
+    genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    genre = db.Column(db.String(255))
+
 
 class Result(db.Model):
     __tablename__ = "results"
     
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('person.user_id'))#forリンキー
-    accuracy_value = db.Column(db.Integer)
-    wpm = db.Column(db.String)
-    playd_at_date = db.Column(db. String)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
+    accuracy_value = db.Column(db.Float)
+    wpm = db.Column(db.Float)
+    playd_at_date = db.Column(db. String(255))
     
-    # result= db.relationship("Result", backref="person")
-    
-    # playd_at_date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo'))
     
 db.create_all()
