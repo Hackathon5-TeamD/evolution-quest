@@ -92,6 +92,7 @@ export const Register: VFC = memo(() => {
         .then((result) => {
           postLoginUser()
             .then((result) => {
+              // atomの更新関数をここで読んで、Recoilでデータを保存
               setLogin(result);
               console.log(result);
               localStorage.setItem("token", result.token);
