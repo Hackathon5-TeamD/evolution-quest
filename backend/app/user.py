@@ -1,4 +1,4 @@
-import bcrypt
+
 from flask import Blueprint, request, jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash#, Bcrypt

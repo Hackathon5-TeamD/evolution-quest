@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from model import Result, db, app, Person
+from model import Result, db, app
 
 app.config['JSON_AS_ASCII'] = False
 
