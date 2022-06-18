@@ -8,6 +8,8 @@ import { useGame } from "../../../hooks/useGame";
 import { useState, useEffect } from "react";
 import { StartAlert } from "./StartAlert/StartAlert";
 import { postGameData } from "../../../api/postGameData";
+import { useRecoilValue } from "recoil";
+import { userLoginState } from "../Register/Register";
 
 export const MainPage = () => {
   // state
@@ -20,6 +22,9 @@ export const MainPage = () => {
   // hooks
   const { jaTerm, roTerm, fetchGame } = useGame();
   const fetchGameData = () => fetchGame();
+
+  // user_idをuserLoginStateから使用するためのvalue定義
+  const userId = useRecoilValue(userLoginState);
 
   //-------------------------  タイピングhooks関連  ------------------------------------
   const {
@@ -62,7 +67,9 @@ export const MainPage = () => {
       const convertedAccuracy = parseFloat(accuracy.toFixed(1));
       // accuracy, wpmをオブジェクトにしてaxiosでサーバーにpostする
       // user_idも後で付け足してね！
+      // サインイン情報のuser_idを使用
       const result = {
+        user_id: userId.user_id,
         accuracy: convertedAccuracy, // float
         wpm: wpm, // int
       };
