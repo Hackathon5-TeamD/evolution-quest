@@ -1,11 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-<<<<<<< HEAD
-# from datetime import datetime
-=======
 from datetime import datetime
->>>>>>> 5f63f04dd658d9ef30e0964c42bb336349ce2d60
 # import pytz
 from flask_migrate import Migrate
 from flask_login import UserMixin, LoginManager
