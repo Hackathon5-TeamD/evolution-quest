@@ -1,8 +1,14 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-# from datetime import datetime
+
+# 使用していないと思われるため一旦コメントアウト
+# import pytz
+
 from flask_migrate import Migrate
+from flask_login import UserMixin, LoginManager
+
+login_manager = LoginManager()
 
 # appにおいておくと循環エラー出るのでこちらに
 app = Flask(__name__)
@@ -19,12 +25,16 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
-class Person(db.Model):
+class Person(UserMixin,db.Model):
+    
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
+    
+    
+    result= db.relationship("Result", backref="users")
 
 class Terminologie(db.Model):
     __tablename__ = "terminologies"
@@ -35,7 +45,7 @@ class Terminologie(db.Model):
     theme_ro = db.Column(db.String(255))
     description_ja = db.Column(db.Text)
     description_ro = db.Column(db.Text)
-
+    
 class Genre(db.Model):
     __tablename__ ="genres"
     genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -46,10 +56,9 @@ class Result(db.Model):
     __tablename__ = "results"
     
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer)#forリンキー
-    accuracy_value = db.Column(db.Integer)
-    wpm = db.Column(db.String)
-    playd_at_date = db.Column(db.String(255))
-    # playd_at_date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo'))
-    
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id')) #user_idからidに修正
+    accuracy_value = db.Column(db.Float)
+    wpm = db.Column(db.Float)
+    playd_at_date = db.Column(db. String(255))
+        
 db.create_all()

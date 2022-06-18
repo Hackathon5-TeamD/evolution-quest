@@ -27,7 +27,7 @@ def get_my_result():
     data = [
         {
         # "result_id" :i.result_id,
-        # "user_id" : i.user_id,
+        "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
         "playd_at_date": i.playd_at_date,
@@ -43,7 +43,7 @@ def get_result_1():
     data = [
         {
         # "result_id" :i.result_id,
-        # "user_id" : i.user_id,
+        "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
         "playd_at_date": i.playd_at_date,
@@ -56,10 +56,12 @@ def get_result_1():
 @result_module.route("/2")
 def get_result_2():
     results = Result.query.all()
+    # person= Person()
     data = [
         {
         # "result_id" :i.result_id,
         # "user_id" : i.user_id,
+        "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
         "playd_at_date": i.playd_at_date,
