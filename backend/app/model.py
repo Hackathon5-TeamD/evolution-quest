@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import pytz
+# import pytz
 from flask_migrate import Migrate
 from flask_login import UserMixin, LoginManager
 

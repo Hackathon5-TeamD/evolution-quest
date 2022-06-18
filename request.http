@@ -2,11 +2,11 @@ POST http://localhost:5000/result HTTP/1.1
 content-type: application/json
 
 {
-    "result_id": 12345,
-    "user_id": 3,
-    "accuracy_value": 4567,
+    "result_id": 123458,
+    "user_id": 5,
+    "accuracy_value": 45679,
     "wpm": 11,
-     "playd_at_date": "2022-07-10"
+     "playd_at_date": "2022-07-11"
  }
 
 ###
