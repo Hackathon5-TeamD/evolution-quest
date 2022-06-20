@@ -2,8 +2,49 @@ import { Title } from "./Title/Title";
 import styles from "./Login.module.css";
 import { Input, Button } from "semantic-ui-react";
 import { RegisterButton } from "./RegisterButton/RegisterButton";
+import { memo, VFC, useState, ChangeEvent } from "react";
+import axios from "axios";
 
-export const Login = () => {
+// バックエンドからのレスポンスの型定義
+type User = {
+  user_id: number;
+  user_name: string;
+  // joined_date: Date;
+  token: string;
+};
+
+export const Login: VFC = memo(() => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // ユーザーネームを保存する関数
+  const onChangeUserNameInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+  };
+
+  // パスワードを保存する関数
+  const onChangePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  // URLに本番には/user/login /user/registerを必ず入れること。
+  const postLoginUser = async () => {
+    try {
+      const result = await axios.post<User>("http://localhost:3001/user", {
+        user_name: userName,
+        password: password,
+        // 本来ならuser_nameとpasswordだけ送れば大丈夫
+        joined_date: new Date(),
+        token: "aaaaaaaa",
+      });
+      return result.data;
+    } catch (err: any) {
+      throw new Error(err);
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -29,4 +70,4 @@ export const Login = () => {
       </div>
     </div>
   );
-};
+});
