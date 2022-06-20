@@ -54,6 +54,23 @@ content-type: application/json
     "password" : "test3"
 }
 
+###
+POST http://localhost:5000/user HTTP/1.1
+content-type: application/json
+
+{
+    "user_name" : "今村 優月",
+    "password" : "test4"
+}
+###
+POST http://localhost:5000/user HTTP/1.1
+content-type: application/json
+
+{
+    "user_name" : "今村 ゆうと",
+    "password" : "test5"
+}
+
 
 
 
@@ -65,7 +82,7 @@ POST http://localhost:5000/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "user_name": "山田長政",
-    "password": "test1"
+    "user_name": "今村 ゆうと",
+    "password": "test5"
 }
 
