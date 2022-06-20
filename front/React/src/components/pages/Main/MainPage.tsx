@@ -73,6 +73,7 @@ export const MainPage = () => {
         wpm: wpm, // int
       };
       postGameData(result);
+      console.log(result);
     }
   }, [phase]);
 
