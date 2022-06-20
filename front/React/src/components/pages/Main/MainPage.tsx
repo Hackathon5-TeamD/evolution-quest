@@ -55,7 +55,6 @@ export const MainPage = () => {
 
   // user_idをuserLoginStateから使用するためのvalue定義
   const userId = useRecoilValue(userLoginState);
-  console.log(userId);
   //-------------------------  ゲーム終了時の処理  ----------------------------------
 
   // 文章を全て入力し終えたらゲームを終了させモーダルを表示、タイマーを停止
@@ -74,7 +73,6 @@ export const MainPage = () => {
         wpm: wpm, // int
       };
       postGameData(result);
-      console.log(result);
     }
   }, [phase]);
 
