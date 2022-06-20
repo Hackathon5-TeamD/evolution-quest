@@ -26,10 +26,36 @@ POST http://localhost:5000/user HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 5,
-    "user_name": "5",
-    "password": "5"
+    "user_name": "にし",
+    "password": "1"
 }
+###
+POST http://localhost:5000/user HTTP/1.1
+content-type: application/json
+
+{
+    "user_name" : "山田長政",
+    "password" : "test1"
+}
+###
+POST http://localhost:5000/user HTTP/1.1
+content-type: application/json
+
+{
+    "user_name" : "浅井長政",
+    "password" : "test2"
+}
+###
+POST http://localhost:5000/user HTTP/1.1
+content-type: application/json
+
+{
+    "user_name" : "滝廉太郎",
+    "password" : "test3"
+}
+
+
+
 
 ###
 GET http://localhost:5000/user HTTP/1.1
@@ -39,8 +65,7 @@ POST http://localhost:5000/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 2,
-    "user_name": "3",
-    "password": "3"
+    "user_name": "山田長政",
+    "password": "test1"
 }
 

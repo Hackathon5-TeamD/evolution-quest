@@ -1,4 +1,6 @@
+from audioop import cross
 import os
+from unittest import result
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -63,6 +65,12 @@ class Result(db.Model):
     accuracy_value = db.Column(db.Float)
     wpm = db.Column(db.Float)
     playd_at_date = db.Column(db. String(255))
+    
+    
+    # def result_user():
+    #     return SELECT * FROM users CROSS JOIN results;
+    
+    
     
     
 db.create_all()
