@@ -23,9 +23,6 @@ export const MainPage = () => {
   const { jaTerm, roTerm, fetchGame } = useGame();
   const fetchGameData = () => fetchGame();
 
-  // user_idをuserLoginStateから使用するためのvalue定義
-  const userId = useRecoilValue(userLoginState);
-
   //-------------------------  タイピングhooks関連  ------------------------------------
   const {
     // phase : { 0:ミスタート, 1:入力中, 2:終わり }
@@ -56,6 +53,9 @@ export const MainPage = () => {
   const sec = parseFloat((getDuration() / 1000).toFixed(2));
   let wpm = Math.floor((correctChar / sec) * 60);
 
+  // user_idをuserLoginStateから使用するためのvalue定義
+  const userId = useRecoilValue(userLoginState);
+  console.log(userId);
   //-------------------------  ゲーム終了時の処理  ----------------------------------
 
   // 文章を全て入力し終えたらゲームを終了させモーダルを表示、タイマーを停止
@@ -69,11 +69,12 @@ export const MainPage = () => {
       // user_idも後で付け足してね！
       // サインイン情報のuser_idを使用
       const result = {
-        user_id: userId.user_id,
+        user_id: userId.id,
         accuracy: convertedAccuracy, // float
         wpm: wpm, // int
       };
       postGameData(result);
+      console.log(result);
     }
   }, [phase]);
 
