@@ -10,6 +10,7 @@ services:
     # docker内と共有するフォルダの指定
     volumes:
       - ./front/React:/front
+      # - ./gunicorn_socket:/tmp/gunicorn_socket
       # - ./front/scripts:/front
     # docker内に入った時の初期パスの指定
     working_dir: /front

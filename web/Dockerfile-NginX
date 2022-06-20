@@ -9,7 +9,7 @@
 FROM nginx:latest
 
 COPY ./web/NginX-conf/nginx.conf /etc/nginx/nginx.conf
-COPY ./web/NginX-conf/server.conf /etc/nginx/conf.d/server.conf
+COPY ./web/NginX-conf/node_server.conf /etc/nginx/conf.d/node_server.conf
 
 
 CMD ["nginx", "-g", "daemon off;"]
