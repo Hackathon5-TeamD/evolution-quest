@@ -6,15 +6,19 @@ from datetime import datetime
 from flask_migrate import Migrate
 from flask_login import UserMixin, LoginManager
 
-login_manager = LoginManager()
-
-base_dir = os.path.dirname(__file__)
 
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+base_dir = os.path.dirname(__file__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     base_dir, "data.sqlite"
 )
+#jwtとの関係があるのかな？いらない？
+#session情報の暗号化？
+app.config['SECRET_KEY'] = os.urandom(24)
 
 # 使用しない機能と思うため,また明示的にオフしておかないとエラーが出ることがある
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

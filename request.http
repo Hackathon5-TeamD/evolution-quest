@@ -2,11 +2,11 @@ POST http://localhost:5000/result HTTP/1.1
 content-type: application/json
 
 {
-    "result_id": 123458,
-    "user_id": 5,
-    "accuracy_value": 45679,
-    "wpm": 11,
-     "playd_at_date": "2022-07-11"
+    "result_id": 10,
+    "user_id": 10,
+    "accuracy_value": 10,
+    "wpm": 10,
+     "playd_at_date": "2022-07-10"
  }
 
 ###
@@ -26,9 +26,9 @@ POST http://localhost:5000/user HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 11,
-    "user_name": "schoollll",
-    "password": "ProtoOuooooo"
+    "user_id": 5,
+    "user_name": "5",
+    "password": "5"
 }
 
 ###
@@ -39,8 +39,8 @@ POST http://localhost:5000/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": 5551,
-    "user_name": "schoollll",
-    "password": "ProtoOuooooo"
+    "user_id": 2,
+    "user_name": "3",
+    "password": "3"
 }
 
