@@ -36,18 +36,20 @@ services:
       context: .
       dockerfile: ./backend/flask_app/Dockerfile
     ports:
-      - "5001:5000"
+      - 5001:5001
     expose:
       - "5001"
     volumes:
       # - ./backend/flask_app/app:/usr/src/app:cached
-      - ./backend/flask_app:/usr/src/app:cached
+      # - ./backend/flask_app:/usr/src/app:cached
       # - ./backend/DB:/usr/src/db:cached
-      # - ./backend/flask_app/scripts:/usr/src/scripts:cached
-      - socket:/tmp
-      # - ./front/React/build:/usr/share/nginx/html
-    working_dir: /usr/src/app
-    command: bash -c "./scripts/run.sh"
+      - ./backend/flask_app/scripts:/var/www/scripts:cached
+      # - socket:/tmp
+      - ./front/React/build:/var/www/public
+      - ./backend/flask_app/app:/var/www/
+      - ./gunicorn_socket:/tmp/gunicorn_socket
+    working_dir: /var/www/scripts
+    command: bash -c "./run.sh"
     networks:
       - backend_network
     environment:
@@ -90,20 +92,26 @@ services:
       - backend_network
 
   web:
-    # container_name: NginX
-    container_name: Apache
+    container_name: NginX
+    # container_name: Apache
     build:
       context: .
-      dockerfile: ./web/Dockerfile
+      dockerfile: ./web/Dockerfile-NginX
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      # - ./web/nginx.conf:/etc/nginx/conf.d/nginx.conf
-      - socket:/tmp
-      # - ./front/React/build:/usr/share/nginx/html
+      # - ./web/nginx.conf:/etc/nginx/conf.d/default.conf
+      # - socket:/tmp
+      # - ./front/React/build:/usr/local/apache2/htdocs
+      - ./front/React/build:/etc/nginx/public
+      - ../ssl/certs/:/etc/pki/tls/certs/
+      - ../ssl/private/:/etc/pki/tls/private/
+      - ./gunicorn_socket:/tmp/gunicorn_socket
       # - "/log/nginx_log:/var/log/nginx"
-    links:
+    depends_on:
       - flask
+    restart: always
     networks:
       - backend_network
 

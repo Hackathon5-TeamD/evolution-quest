@@ -1,7 +1,15 @@
+# FROM nginx:latest
+
+# # RUN rm -rf /etc/nginx/conf.d/default.conf
+
+# COPY ./web/nginx.conf /etc/nginx/conf.d/default.conf
+# # COPY ./web/nginx.conf /etc/nginx/conf.d/nginx.conf
+# # CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/conf.d/nginx.conf"]
+
 FROM nginx:latest
 
-# RUN rm -rf /etc/nginx/conf.d/default.conf
+COPY ./web/NginX-conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./web/NginX-conf/server.conf /etc/nginx/conf.d/server.conf
 
-COPY ./web/default.conf /etc/nginx/conf.d/default.conf
-# COPY ./web/nginx.conf /etc/nginx/conf.d/nginx.conf
-# CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/conf.d/nginx.conf"]
+
+CMD ["nginx", "-g", "daemon off;"]

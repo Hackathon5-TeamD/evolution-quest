@@ -1,0 +1,8 @@
+FROM httpd:2.4.54-alpine3.16
+
+WORKDIR /usr/local/apache2
+
+RUN mkdir ./www
+
+COPY ./web/Apache-conf ./conf
+COPY ./front/React/build ./www
