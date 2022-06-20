@@ -1,7 +1,7 @@
 from model import  app #, Person, db
 # from flask import request
 
-# モジュールのインポート
+# # モジュールのインポート
 from main import main_module
 from user import user_module
 from terminologie import terminologie_module, create_module, update_module, delete_module

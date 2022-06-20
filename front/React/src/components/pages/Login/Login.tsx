@@ -22,13 +22,6 @@ export const Login = () => {
           fluid
           placeholder="Password"
         />
-        <Input
-          className={styles.form}
-          type="password"
-          focus
-          fluid
-          placeholder="Confirm Password"
-        />
         <Button className={styles.loginbutton} size="small">
           Log in
         </Button>
