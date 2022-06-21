@@ -45,3 +45,17 @@ git branch -D feature/#number
 
 # 以降繰り返し
 ```
+
+## 【開発・検証時のみ】json.server起動
+`/front/React`に移動し、
+
+```bash
+#Mac, Linux
+npm run json-server
+#Windows
+npm run windows-json-server
+```
+※Windowsで実行する場合、当該フォルダに`cross-env`が必要となります
+```bash
+npm install --save cross-env
+```

@@ -68,13 +68,6 @@ def get_result_2():
         for i in results
     ]
     return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[10:20])
-    
-
-
-
-
-
-
 
 @result_module.route("",methods=["POST"])
 def post_result():
