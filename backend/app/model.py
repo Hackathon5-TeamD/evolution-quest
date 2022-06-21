@@ -71,6 +71,8 @@ class Result(db.Model):
     # def result_user():
     #     return SELECT * FROM users CROSS JOIN results;
     
+
     
  
+
 db.create_all()
