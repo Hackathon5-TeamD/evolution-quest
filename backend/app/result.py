@@ -43,13 +43,7 @@ def get_my_result(user_id):
             playd_at_date = payload.get("playd_at_date"))
     
         users = Result.query.filter_by(user_id=insert_data.user_id).all()
-        # username = session.query(Result).all()
-        # return {
-        #         "user_id":user.user_id,
-        #         "accuracy_value":user.accuracy_value,
-        #         "wpm":user.wpm,
-        #         "playd_at_date":user.playd_at_date
-        #        }        
+        
         my_data = [
             {
                 "user_id":i.user_id,
@@ -59,42 +53,27 @@ def get_my_result(user_id):
             }
             for i in users
         ]
-        # return jsonify(my_data)
     
         return jsonify(sorted(my_data, key=lambda x: x['playd_at_date'],reverse=True)[0:5])
-        
-    
-    # results = Result.query.all()
-    # results = Result.query.filter(Person.user_id == 1)
-    # return jsonify(results)
-    #  data = [
-    #     {
-    #     # "result_id" :i.result_id,
-    #     "user_id" : i.user_id,
-    #     "accuracy_value" : i.accuracy_value,
-    #     "wpm" : i.wpm,
-    #     "playd_at_date": i.playd_at_date,
-    #     }
-        # for i in results
-    # ]
-    
-    # user_data = {"user_id":data[0]["user_id"]} #in data.keys()
-    
-    # return user_data
-    # return {
-    #              "user_id":user_data
-    # }
-    # sort_data = jsonify(sorted(data, key=lambda x: x['playd_at_date'],reverse=True)[0:5])
-    # if data.user_id:
-    #     return sort_data.user_id == 4
-
-
-
 
 #ランキングトップ１０
+# @result_module.route("/1")
+# def get_result_1():
+#     results = Result.query.all()
+#     data = [
+#         {
+#         # "result_id" :i.result_id,
+#         "user_id" : i.user_id,
+#         "accuracy_value" : i.accuracy_value,
+#         "wpm" : i.wpm,
+#         "playd_at_date": i.playd_at_date,
+#         }
+#         for i in results
+#     ]
+#     return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[0:10])
 @result_module.route("/1")
 def get_result_1():
-    results = Result.query.all()
+    results_data = Result.query.all()
     data = [
         {
         # "result_id" :i.result_id,
@@ -103,12 +82,25 @@ def get_result_1():
         "wpm" : i.wpm,
         "playd_at_date": i.playd_at_date,
         }
-        for i in results
-        
-        
-        
+        for i in results_data
     ]
-    return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[0:10])
+    user_table_data = session.query(Person,Result,Person.user_id,Result.accuracy_value)
+    
+    
+    for i in user_table_data:
+        return (
+        "user_id:{}".format(i.user_id),
+        "accuracy_value:{}".format(i.accuracy_value)
+        )
+    
+    # return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[0:10])
+
+
+
+
+
+
+
 
 #ランキング11~20まで出力
 @result_module.route("/2")
