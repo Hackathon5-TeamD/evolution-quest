@@ -73,7 +73,9 @@ def login_user():
                }        
     else:
         return "nameかpass違うよ"
-    
+
+
+# 以下JWTの仕組み
 @user_module.route("/token", methods=["POST"])
 def token():
     user_name = request.json.get("user_name")
