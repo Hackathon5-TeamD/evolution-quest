@@ -35,7 +35,7 @@ def user():
     persons = Person.query.all()
     data = [
         {
-            "id": i.id,
+            "user_id": i.user_id,
             "user_name": i.user_name,
             "password": i.password
         }

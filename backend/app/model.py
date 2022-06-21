@@ -35,7 +35,7 @@ class Person(UserMixin,db.Model):
     
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
     
@@ -62,7 +62,7 @@ class Result(db.Model):
     __tablename__ = "results"
     
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id')) #user_idからidに修正
+    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
     accuracy_value = db.Column(db.Float)
     wpm = db.Column(db.Float)
     playd_at_date = db.Column(db. String(255))
@@ -70,9 +70,5 @@ class Result(db.Model):
     
     # def result_user():
     #     return SELECT * FROM users CROSS JOIN results;
-    
-
-    
- 
 
 db.create_all()
