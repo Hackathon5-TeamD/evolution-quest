@@ -21,14 +21,14 @@ app.config["JSON_AS_ASCII"] = False
 user_module = Blueprint("user_module", __name__, url_prefix="/user")
 
 # User全てをJSONで取得
-@user_module.route("", methods=["GET"])
-def user():
+@user_module.route("")
+def get_user():
     persons = Person.query.all()
     data = [
         {
             "user_id": i.user_id,
             "user_name": i.user_name,
-            "password": i.password
+            # "password": i.password,
         }
         for i in persons
     ]

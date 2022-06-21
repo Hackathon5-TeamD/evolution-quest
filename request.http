@@ -3,9 +3,29 @@ content-type: application/json
 
 { 
     "user_id" : 1,
+    "accuracy_value" : 98.2130,
+    "wpm" : 140,
+    "playd_at_date" :1655182595
+}
+###
+POST http://localhost:5000/result HTTP/1.1
+content-type: application/json
+
+{ 
+    "user_id" : 1,
+    "accuracy_value" : 200,
+    "wpm" : 140,
+    "playd_at_date" :1655282595
+}
+###
+POST http://localhost:5000/result HTTP/1.1
+content-type: application/json
+
+{ 
+    "user_id" : 1,
     "accuracy_value" : 98.2,
     "wpm" : 100.9,
-    "playd_at_date" :"2022-6-10"
+    "playd_at_date" :1655782595
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
@@ -15,7 +35,7 @@ content-type: application/json
     "user_id" : 2,
     "accuracy_value" : 97.4,
     "wpm" : 117.2,
-    "playd_at_date" :"2022-6-11"
+    "playd_at_date" :1655882595
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
@@ -25,24 +45,42 @@ content-type: application/json
     "user_id" : 3,
     "accuracy_value" : 96.3,
     "wpm" : 105.3,
-    "playd_at_date" : "2022-6-12-12-34-56-1230"
-}
+    "playd_at_date" : 1655982595
+}    
 ###
 POST http://localhost:5000/result HTTP/1.1
 content-type: application/json
 
 { 
     "user_id" : 4,
-    "accuracy_value" : 94.3,
-    "wpm" : 100.3,
-    "playd_at_date" : "2022-6-13-12-34-56-1230"
+    "accuracy_value" : 96.3,
+    "wpm" : 105.3,
+    "playd_at_date" : 1655582595
+}
+###
+POST http://localhost:5000/result HTTP/1.1
+content-type: application/json
+
+{ 
+    "user_id" : 5,
+    "accuracy_value" : 98.3,
+    "wpm" : 120.3,
+    "playd_at_date" : 1655482595
 }
 
 ###
 
 GET http://localhost:5000/result HTTP/1.1
 ###
-GET http://localhost:5000/result/user HTTP/1.1
+# GET http://localhost:5000/result/user/ HTTP/1.1
+###
+POST http://localhost:5000/result/user/1 HTTP/1.1
+content-type: application/json
+
+{
+    "user_id":1
+}
+
 
 ###
 GET http://localhost:5000/result/1 HTTP/1.1
