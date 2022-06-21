@@ -1,4 +1,6 @@
+from audioop import cross
 import os
+from unittest import result
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,16 +10,20 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import UserMixin, LoginManager
 
-login_manager = LoginManager()
 
-# appにおいておくと循環エラー出るのでこちらに
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 
 base_dir = os.path.dirname(__file__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     base_dir, "data.sqlite"
 )
+#jwtとの関係があるのかな？いらない？
+#session情報の暗号化？
+app.config['SECRET_KEY'] = os.urandom(24)
 
 # 使用しない機能と思うため,また明示的にオフしておかないとエラーが出ることがある
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -60,5 +66,13 @@ class Result(db.Model):
     accuracy_value = db.Column(db.Float)
     wpm = db.Column(db.Float)
     playd_at_date = db.Column(db. String(255))
-        
+    
+    
+    # def result_user():
+    #     return SELECT * FROM users CROSS JOIN results;
+    
+
+    
+ 
+
 db.create_all()

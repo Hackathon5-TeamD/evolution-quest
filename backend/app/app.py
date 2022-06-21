@@ -1,4 +1,4 @@
-from model import   app#, Person, db
+from model import  app #, Person, db
 # from flask import request
 
 # # モジュールのインポート
