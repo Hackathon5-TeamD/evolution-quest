@@ -2,7 +2,7 @@
 from flask import Blueprint, request , jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash 
-from flask_login import UserMixin, login_user
+# from flask_login import UserMixin, login_user
 from sqlalchemy.orm import sessionmaker
 
 from sqlalchemy import create_engine, Column, String, Integer
@@ -58,12 +58,10 @@ def login_user():
     user = Person.query.filter_by(user_name=insert_data.user_name).first()
     if check_password_hash(user.password, insert_data.password):
         username = session.query(Person).get("user_id")
-        return  user.user_name
-        
-    
-        # login_user(user)
-        # return "loginしたよ"
-        # return login_user(user)
+        # return  jsonify([{"user_name":user.user_name}])
+        return {
+                "user_name":user.user_name
+               }        
     else:
         return "nameかpass違うよ"
     
