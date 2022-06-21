@@ -9,6 +9,7 @@ import { atom, useSetRecoilState } from "recoil";
 
 // バックエンドからのレスポンスの型定義
 type User = {
+  id: number;
   user_id: number;
   user_name: string;
   // joined_date: Date;
@@ -19,6 +20,7 @@ type User = {
 export const userLoginState = atom<User>({
   key: "userLoginState",
   default: {
+    id: 0,
     user_id: 0,
     user_name: "",
     token: "",
