@@ -16,17 +16,17 @@ SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路
 session = SessionMaker()  # 経路を実際に作成しました
  
 
-app.config['JSON_AS_ASCII'] = False
+app.config["JSON_AS_ASCII"] = False
 
-user_module = Blueprint("user_module", __name__, url_prefix="/user")
+user_module = Blueprint("user_module", __name__, url_prefix="/person")
 
 # User全てをJSONで取得
-@user_module.route("")
+@user_module.route("", methods=["GET"])
 def user():
     persons = Person.query.all()
     data = [
         {
-            "user_id": i.user_id,
+            "id": i.id,
             "user_name": i.user_name,
             "password": i.password
         }
@@ -65,5 +65,3 @@ def login_user():
     else:
         return "nameかpass違うよ"
     
-
-

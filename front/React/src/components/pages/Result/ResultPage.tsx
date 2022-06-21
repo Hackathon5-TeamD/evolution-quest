@@ -15,7 +15,7 @@ export const ResultPage = () => {
   const [timesFetchedArr2, setTimesFetchedArr2] = useState<number>(0);
 
   // サーバーにリザルトデータ配列を取りに行く関数
-  const fetch = (page) => fetchData(page);
+  const fetch = (page: number) => fetchData(page);
 
   // 1回目のローディングは1-10位のデータを何もしなくても取ってくる
   useEffect(() => {

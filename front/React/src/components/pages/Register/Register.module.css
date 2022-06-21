@@ -21,3 +21,10 @@
 .signupbutton {
   width: 100%;
 }
+
+.errorMessage {
+  color: whitesmoke;
+  margin: 2%;
+  font-weight: bold;
+  font-size: large;
+}
