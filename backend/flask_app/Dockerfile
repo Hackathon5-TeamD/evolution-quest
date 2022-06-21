@@ -12,7 +12,7 @@ WORKDIR /var/www
 
 COPY ./backend/flask_app/app .
 COPY ./backend/flask_app/scripts ./scripts
-COPY ./front/React/build ./public
+# COPY ./front/React/build ./public
 
 ENV FLASK_APP=app:app
 

@@ -1,5 +1,6 @@
 import axios from "axios";
-const Url = `http://localhost:3001`;
+// const Url = `http://localhost:3001`;
+const Url = `http://flask:5001`;
 
 export const getRanking = async (page: number) => {
   try {
