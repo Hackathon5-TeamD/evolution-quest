@@ -10,6 +10,8 @@ from sqlalchemy import create_engine, Column, String, Integer
 from sqlalchemy.ext.declarative import declarative_base
 
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
 app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -81,3 +83,9 @@ def token():
 
     access_token = create_access_token(identity=user_name)
     return jsonify(access_token=access_token)
+
+@user_module.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
