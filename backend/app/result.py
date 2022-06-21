@@ -60,7 +60,6 @@ def get_result_2():
     data = [
         {
         # "result_id" :i.result_id,
-        # "user_id" : i.user_id,
         "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
