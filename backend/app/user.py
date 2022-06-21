@@ -18,7 +18,7 @@ session = SessionMaker()  # 経路を実際に作成しました
 
 app.config["JSON_AS_ASCII"] = False
 
-user_module = Blueprint("user_module", __name__, url_prefix="/person")
+user_module = Blueprint("user_module", __name__, url_prefix="/user")
 
 # User全てをJSONで取得
 @user_module.route("", methods=["GET"])
@@ -26,7 +26,7 @@ def user():
     persons = Person.query.all()
     data = [
         {
-            "id": i.id,
+            "user_id": i.user_id,
             "user_name": i.user_name,
             "password": i.password
         }
@@ -58,7 +58,6 @@ def login_user():
     user = Person.query.filter_by(user_name=insert_data.user_name).first()
     if check_password_hash(user.password, insert_data.password):
         username = session.query(Person).get("user_id")
-        # return  jsonify([{"user_name":user.user_name}])
         return {
                 "user_name":user.user_name
                }        
