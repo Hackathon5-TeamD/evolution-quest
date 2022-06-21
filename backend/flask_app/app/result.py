@@ -36,6 +36,9 @@ def get_my_result():
     ]
     return jsonify(sorted(data, key=lambda x: x['playd_at_date'],reverse=True)[0:5])
 
+
+
+
 #ランキングトップ１０
 @result_module.route("/1")
 def get_result_1():
@@ -49,6 +52,9 @@ def get_result_1():
         "playd_at_date": i.playd_at_date,
         }
         for i in results
+        
+        
+        
     ]
     return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[0:10])
 
@@ -60,7 +66,6 @@ def get_result_2():
     data = [
         {
         # "result_id" :i.result_id,
-        # "user_id" : i.user_id,
         "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
@@ -69,13 +74,6 @@ def get_result_2():
         for i in results
     ]
     return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[10:20])
-    
-
-
-
-
-
-
 
 @result_module.route("",methods=["POST"])
 def post_result():
