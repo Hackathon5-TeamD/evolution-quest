@@ -60,15 +60,12 @@ class Genre(db.Model):
 # 小数点以下が入るとのことでaccuracy_valueとwpmをFloatに変更
 class Result(db.Model):
     __tablename__ = "results"
-    
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id')) 
     accuracy_value = db.Column(db.Float)
     wpm = db.Column(db.Float)
-    playd_at_date = db.Column(db. String(255))
+    playd_at_date = db.Column(db.Integer)
     
     
     # def result_user():
     #     return SELECT * FROM users CROSS JOIN results;
-
-db.create_all()
