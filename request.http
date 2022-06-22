@@ -3,9 +3,9 @@ content-type: application/json
 
 { 
     "user_id" : 1,
-    "accuracy_value" : 98.2130,
-    "wpm" : 140,
-    "playd_at_date" :1655182595
+    "accuracy_value" : 198.2130,
+    "wpm" : 150,
+    "playd_at_date" :1656182595
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
@@ -33,9 +33,9 @@ content-type: application/json
 
 { 
     "user_id" : 2,
-    "accuracy_value" : 97.4,
+    "accuracy_value" : 197.4,
     "wpm" : 117.2,
-    "playd_at_date" :1655882595
+    "playd_at_date" :1657882595
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
@@ -67,6 +67,16 @@ content-type: application/json
     "wpm" : 120.3,
     "playd_at_date" : 1655482595
 }
+###
+POST http://localhost:5000/result HTTP/1.1
+content-type: application/json
+
+{ 
+    "user_id" : 6,
+    "accuracy_value" : 210,
+    "wpm" : 210,
+    "playd_at_date" : 1660482595
+}
 
 ###
 
@@ -74,7 +84,7 @@ GET http://localhost:5000/result HTTP/1.1
 ###
 # GET http://localhost:5000/result/user/ HTTP/1.1
 ###
-POST http://localhost:5000/result/user/1 HTTP/1.1
+POST http://localhost:5000/record/1 HTTP/1.1
 content-type: application/json
 
 {
