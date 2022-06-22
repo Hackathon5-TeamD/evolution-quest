@@ -44,7 +44,6 @@ export const Login: VFC = memo(() => {
         user_name: userName,
         password: password,
         // 本来ならuser_nameとpasswordだけ送れば大丈夫
-        joined_date: new Date(),
         token: "aaaaaaaa",
       });
       return result.data;
