@@ -3,10 +3,8 @@ from model import app, Terminologie, db
 
 app.config["JSON_AS_ASCII"] = False
 
-terminologie_module = Blueprint("terminologie_module", __name__, template_folder="templates", url_prefix="/terminologie")
-edit_module = Blueprint("create_module", __name__, template_folder="templates")
-# update_module = Blueprint("update_module", __name__, template_folder="templates")
-# delete_module = Blueprint("delete_module", __name__)
+terminologie_module = Blueprint("terminologie_module", __name__, url_prefix="/terminologie")
+edit_module = Blueprint("edit_module", __name__, template_folder="templates")
 
 # 用語全てをJSONで取得
 @terminologie_module.route("/", methods=["GET"])
@@ -57,7 +55,7 @@ def create():
         # 新規データなのでadd必要
         db.session.add(post)
         db.session.commit()
-        return redirect("/create")
+        return redirect("/")
     else:
         return render_template("create.html")
     

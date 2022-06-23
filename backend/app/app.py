@@ -1,4 +1,4 @@
-from model import  app
+from model import app
 
 # # モジュールのインポート
 from main import main_module
