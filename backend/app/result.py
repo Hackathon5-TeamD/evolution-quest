@@ -1,9 +1,18 @@
 from flask import Blueprint, request, jsonify
-from model import Result, db, app
+from model import Result, db, app, Person
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 
 app.config['JSON_AS_ASCII'] = False
 
 result_module = Blueprint("result_module", __name__,url_prefix="/result")
+engine = create_engine('sqlite:///data.sqlite')  # data.sqliteというデータベースを使うという宣言です
+Base = declarative_base()  # データベースのテーブルの親です
+
+Base.metadata.create_all(engine)  # 実際にデータベースを構築します
+SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
+session = SessionMaker()  # 経路を実際に作成しました
 
 @result_module.route("")
 def get_result():
@@ -20,55 +29,37 @@ def get_result():
     ]
     return jsonify(data) 
 
-#直近の5日分出力
-@result_module.route("/user")
-def get_my_result():
-    results = Result.query.all()
-    data = [
-        {
-        # "result_id" :i.result_id,
-        "user_id" : i.user_id,
-        "accuracy_value" : i.accuracy_value,
-        "wpm" : i.wpm,
-        "playd_at_date": i.playd_at_date,
-        }
-        for i in results
-    ]
-    return jsonify(sorted(data, key=lambda x: x['playd_at_date'],reverse=True)[0:5])
 
-#ランキングトップ１０
-@result_module.route("/1")
-def get_result_1():
-    results = Result.query.all()
+#ランキング1~10まで出力
+
+@result_module.route("/1", methods=["GET"])
+def get_join_result():
+    results = db.session.query(Result, Result.accuracy_value, Result.user_id, Person.user_name, Person.user_id).join(Person,Result.user_id == Person.user_id) 
     data = [
         {
-        # "result_id" :i.result_id,
-        "user_id" : i.user_id,
+        "user_name" : i.user_name,
         "accuracy_value" : i.accuracy_value,
-        "wpm" : i.wpm,
-        "playd_at_date": i.playd_at_date,
         }
         for i in results
     ]
     return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[0:10])
 
+
 #ランキング11~20まで出力
-@result_module.route("/2")
-def get_result_2():
-    results = Result.query.all()
-    # person= Person()
+@result_module.route("/2", methods=["GET"])
+def get_join_result2():
+    results = db.session.query(Result, Result.accuracy_value, Result.user_id, Person.user_name, Person.user_id).join(Person,Result.user_id == Person.user_id) 
     data = [
         {
-        # "result_id" :i.result_id,
-        "user_id" : i.user_id,
+        "user_name" : i.user_name,
         "accuracy_value" : i.accuracy_value,
-        "wpm" : i.wpm,
-        "playd_at_date": i.playd_at_date,
         }
         for i in results
     ]
     return jsonify(sorted(data, key=lambda x: x['accuracy_value'],reverse=True)[10:20])
 
+
+#ゲームの結果を登録
 @result_module.route("",methods=["POST"])
 def post_result():
     payload = request.json
