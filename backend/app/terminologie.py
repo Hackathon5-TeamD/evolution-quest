@@ -3,13 +3,13 @@ from model import app, Terminologie, db
 
 app.config["JSON_AS_ASCII"] = False
 
-terminologie_module = Blueprint("terminologie_module", __name__)
-create_module = Blueprint("create_module", __name__, template_folder="templates")
-update_module = Blueprint("update_module", __name__, template_folder="templates")
-delete_module = Blueprint("delete_module", __name__)
+terminologie_module = Blueprint("terminologie_module", __name__, template_folder="templates", url_prefix="/terminologie")
+edit_module = Blueprint("create_module", __name__, template_folder="templates")
+# update_module = Blueprint("update_module", __name__, template_folder="templates")
+# delete_module = Blueprint("delete_module", __name__)
 
 # 用語全てをJSONで取得
-@terminologie_module.route("/terminologie/", methods=["GET"])
+@terminologie_module.route("/", methods=["GET"])
 def terms():
     terms = Terminologie.query.all()
     data = [
@@ -27,7 +27,7 @@ def terms():
     return jsonify(data) 
 
 # 用語を１つだけJSONで取得
-@terminologie_module.route("/terminologie/<int:terminologie_id>", methods=["GET"])
+@terminologie_module.route("/<int:terminologie_id>", methods=["GET"])
 def term(terminologie_id):
     term = Terminologie.query.get(terminologie_id)
     data = [
@@ -43,7 +43,7 @@ def term(terminologie_id):
     return jsonify(data) 
 
 # 用語の新規作成
-@create_module.route("/create", methods=["GET", "POST"])
+@edit_module.route("/create", methods=["GET", "POST"])
 def create():
     if request.method == "POST":
         genre_id = request.form.get("genre_id")
@@ -62,7 +62,7 @@ def create():
         return render_template("create.html")
     
 # 用語の編集
-@update_module.route("/update/<int:terminologie_id>", methods=["GET", "POST"])
+@edit_module.route("/update/<int:terminologie_id>", methods=["GET", "POST"])
 def update(terminologie_id):
     term = Terminologie.query.get(terminologie_id)
     if request.method == "GET":
@@ -78,7 +78,7 @@ def update(terminologie_id):
         return "用語の編集が完了しました"
 
 # 用語の削除（問答無用で削除されます）
-@delete_module.route("/delete/<int:terminologie_id>", methods=["GET", "POST"])
+@edit_module.route("/delete/<int:terminologie_id>", methods=["GET", "POST"])
 # @login_required
 def delete(terminologie_id):
     post = Terminologie.query.get(terminologie_id)
