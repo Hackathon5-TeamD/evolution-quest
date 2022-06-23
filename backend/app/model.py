@@ -18,9 +18,18 @@ login_manager.init_app(app)
 
 base_dir = os.path.dirname(__file__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
-    base_dir, "data.sqlite"
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8'.format(
+    **{
+      'user': os.getenv('MYSQL_USER'),
+      'password': os.getenv('MYSQL_PASSWORD'),
+      'host': os.getenv('MYSQL_HOST'),
+      'port': os.getenv("MYSQL_PORT"),
+      'database': os.getenv('MYSQL_DATABASE'),
+    })
+  
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+#     base_dir, "data.sqlite"
+# )
 #jwtとの関係があるのかな？いらない？
 #session情報の暗号化？
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -35,7 +44,7 @@ class Person(UserMixin,db.Model):
     
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
     
@@ -60,11 +69,12 @@ class Genre(db.Model):
 # 小数点以下が入るとのことでaccuracy_valueとwpmをFloatに変更
 class Result(db.Model):
     __tablename__ = "results"
+    
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id')) 
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id')) #user_idからidに修正
     accuracy_value = db.Column(db.Float)
     wpm = db.Column(db.Float)
-    playd_at_date = db.Column(db.Integer)
+    playd_at_date = db.Column(db. String(255))
     
     
     # def result_user():
