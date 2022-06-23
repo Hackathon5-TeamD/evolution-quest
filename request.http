@@ -100,7 +100,7 @@ GET http://localhost:5000/result/2 HTTP/1.1
 
 
 ###
-POST http://localhost:5000/user HTTP/1.1
+POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
@@ -108,7 +108,7 @@ content-type: application/json
     "password": "1"
 }
 ###
-POST http://localhost:5000/user HTTP/1.1
+POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
@@ -116,7 +116,7 @@ content-type: application/json
     "password" : "test1"
 }
 ###
-POST http://localhost:5000/user HTTP/1.1
+POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
@@ -124,7 +124,7 @@ content-type: application/json
     "password" : "test2"
 }
 ###
-POST http://localhost:5000/user HTTP/1.1
+POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
@@ -133,7 +133,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:5000/user HTTP/1.1
+POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
@@ -141,17 +141,21 @@ content-type: application/json
     "password" : "test4"
 }
 ###
-POST http://localhost:5000/user HTTP/1.1
+POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
     "user_name" : "今村 ゆうと",
     "password" : "test5"
 }
+###
+POST http://localhost:5000/user/login HTTP/1.1
+content-type: application/json
 
-
-
-
+{
+    "user_name" : "にし",
+    "password" : "1"
+}
 ###
 GET http://localhost:5000/user HTTP/1.1
 
@@ -162,5 +166,13 @@ content-type: application/json
 {
     "user_name": "今村 優月",
     "password": "test4"
+}
+###
+POST http://localhost:5000/user/login HTTP/1.1
+content-type: application/json
+
+{
+    "user_name": "にし",
+    "password": "1"
 }
 

@@ -8,8 +8,6 @@ from terminologie import terminologie_module, create_module, update_module, dele
 from result import result_module
 from record import record_module
 
-# app = Flask(__name__)
-
 # コントローラー先
 app.register_blueprint(main_module)
 app.register_blueprint(user_module)

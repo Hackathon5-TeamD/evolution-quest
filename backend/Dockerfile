@@ -7,7 +7,7 @@ RUN apt update \
 
 WORKDIR /usr/src/app
 
-ENV FLASK_APP=app
+ENV FLASK_APP=model
 
 COPY requirements.txt .
 

@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify
 from model import Result, app
 
 app.config['JSON_AS_ASCII'] = False
-
 record_module = Blueprint("record_module", __name__,url_prefix="/record")
 
 
@@ -16,11 +15,16 @@ def get_my_result(user_id):
             accuracy_value = payload.get("accuracy_value"),
             wpm = payload.get("wpm"),
             playd_at_date = payload.get("playd_at_date"))
-    
+        
+        # results = db.session.query(Result, Result.accuracy_value, Result.user_id, Person.user_name, Person.user_id).join(Person,Result.user_id == Person.user_id) 
+        
         users = Result.query.filter_by(user_id=insert_data.user_id).all()
+        
+        # return jsonify(users.user_name)
         
         my_data = [
             {
+                "user_name":i.users.user_name,
                 "user_id":i.user_id,
                 "accuracy_value":i.accuracy_value,
                 "wpm":i.wpm,
