@@ -3,7 +3,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(
+    app,
+    supports_credentials=True
+)
+
 base_dir = os.path.dirname(__file__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     base_dir, "data.sqlite"
@@ -23,7 +29,6 @@ class Person(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_name = db.Column(db.String(255))
     password = db.Column(db.String(255))
-    token = db.Column(db.String(255))
     
     result= db.relationship("Result", backref="users")
 
@@ -50,6 +55,6 @@ class Result(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey('users.user_id')) 
     accuracy_value = db.Column(db.Float)
     wpm = db.Column(db.Float)
-    playd_at_date = db.Column(db.Integer)
+    played_at_date = db.Column(db.Integer)
 
 db.create_all()

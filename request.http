@@ -145,8 +145,8 @@ POST http://localhost:5000/user/register HTTP/1.1
 content-type: application/json
 
 {
-    "user_name" : "今村 ゆうと",
-    "password" : "test5"
+    "user_name" : "今村 大介 ",
+    "password" : "test7"
 }
 ###
 POST http://localhost:5000/user/login HTTP/1.1

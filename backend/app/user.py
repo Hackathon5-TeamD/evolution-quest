@@ -1,6 +1,6 @@
 from atexit import register
 import os
-from flask import Blueprint, request , jsonify,render_template
+from flask import Blueprint, request , jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash 
 from flask_jwt_extended import create_access_token
@@ -34,10 +34,8 @@ def post_user():
     access_token = create_access_token(identity=payload.get("user_name"))
     
     insert_data = Person(
-        user_id = payload.get("user_id"),
         user_name = payload.get("user_name"),
         password = generate_password_hash(payload.get("password")),
-        token = access_token
         )
     db.session.add(insert_data)
     db.session.commit()
@@ -51,6 +49,7 @@ def post_user():
 
 @user_module.route('/login',methods=["GET","POST"])
 def login_user():
+    print("test")
     payload = request.json
     insert_data = Person(
         user_id = payload.get("user_id"),
@@ -63,15 +62,16 @@ def login_user():
         
         return jsonify(
             access_token = access_token,
+            user_id = user.user_id,
             user_name = user.user_name
             )
     else:
         return "nameかpass違うよ"
-@user_module.route("/protected", methods=["GET"])
-@jwt_required()
-def protected():
-    current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+# @user_module.route("/protected", methods=["GET"])
+# @jwt_required()
+# def protected():
+#     current_user = get_jwt_identity()
+#     return jsonify(logged_in_as=current_user), 200
     
 # 以下JWTの仕組み
 # @user_module.route("/token", methods=["POST"])
@@ -88,4 +88,4 @@ def protected():
 # @jwt_required()
 # def protected():
 #     current_user = get_jwt_identity()
-#     return jsonify(logged_in_as=current_user), 200
+#     return jsonify(logged_in_as=current_user), 20
