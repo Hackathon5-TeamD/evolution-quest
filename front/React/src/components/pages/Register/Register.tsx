@@ -5,6 +5,8 @@ import { Title } from "../Login/Title/Title";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { atom, useSetRecoilState } from "recoil";
+// グローバルステートの永続化　リロードされてもデータが消えないように。
+import { recoilPersist } from "recoil-persist";
 // サインアップとは、会員登録のこと。このページでは会員登録のロジックを書く。
 
 // バックエンドからのレスポンスの型定義
@@ -16,14 +18,18 @@ type User = {
   token: string;
 };
 
+// recoil-persistを使用する。
+const { persistAtom } = recoilPersist();
+
 // atomの初期値
-export const userLoginState = atom<User>({
+export const userLoginState = atom({
   key: "userLoginState",
   default: {
     id: 0,
     user_id: 0,
     user_name: "",
     token: "",
+    effects_UNSTABLE: [persistAtom],
   },
 });
 
