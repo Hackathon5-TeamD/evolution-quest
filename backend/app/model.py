@@ -40,7 +40,7 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
-class Person(UserMixin,db.Model):
+class Person(UserMixin, db.Model):
     
     __tablename__ = "users"
 
