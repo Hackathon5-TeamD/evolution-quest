@@ -2,7 +2,7 @@ POST http://localhost:5000/result HTTP/1.1
 content-type: application/json
 
 { 
-    "user_id" : 1,
+    "user_id" : 3,
     "accuracy_value" : 198.2130,
     "wpm" : 150,
     "playd_at_date" :1656182595
@@ -63,9 +63,9 @@ content-type: application/json
 
 { 
     "user_id" : 5,
-    "accuracy_value" : 98.3,
-    "wpm" : 120.3,
-    "playd_at_date" : 1655482595
+    "accuracy_value" : 155,
+    "wpm" : 320.3,
+    "playd_at_date" : 1695482595
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
