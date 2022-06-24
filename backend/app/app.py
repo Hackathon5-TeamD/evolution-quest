@@ -1,5 +1,4 @@
 from model import  app #, Person, db
-# from flask import request
 
 # # モジュールのインポート
 from main import main_module
@@ -7,11 +6,6 @@ from user import user_module
 from terminologie import terminologie_module, create_module, update_module, delete_module
 from result import result_module
 from record import record_module
-
-
-
-
-
 
 # コントローラー先
 app.register_blueprint(main_module)

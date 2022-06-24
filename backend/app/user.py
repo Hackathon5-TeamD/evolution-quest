@@ -10,13 +10,6 @@ from flask_jwt_extended import JWTManager
 
 app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
 jwt = JWTManager(app)
-
-# engine = create_engine('sqlite:///data.sqlite')  # data.sqliteというデータベースを使うという宣言です
-# Base = declarative_base()  # データベースのテーブルの親です
-
-# Base.metadata.create_all(engine)  # 実際にデータベースを構築します
-# SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
-# session = SessionMaker()  # 経路を実際に作成しました
 app.config["JSON_AS_ASCII"] = False
 
 user_module = Blueprint("user_module", __name__, url_prefix="/user")
@@ -57,11 +50,6 @@ def post_user():
             )
 
 @user_module.route('/login',methods=["GET","POST"])
-# @jwt_required()
-# def login_user():
-#     current_user = get_jwt_identity()
-#     return jsonify(logged_in_as=current_user), 200
-
 def login_user():
     payload = request.json
     insert_data = Person(
@@ -79,6 +67,11 @@ def login_user():
             )
     else:
         return "nameかpass違うよ"
+@user_module.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
     
 # 以下JWTの仕組み
 # @user_module.route("/token", methods=["POST"])
