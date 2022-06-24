@@ -10,7 +10,7 @@ services:
     # docker内と共有するフォルダの指定
     volumes:
       - ./front/React:/front
-      # - ./gunicorn_socket:/tmp/gunicorn_socket
+      - ./gunicorn_socket:/tmp/gunicorn_socket
       # - ./front/scripts:/front
     # docker内に入った時の初期パスの指定
     working_dir: /front
@@ -27,7 +27,8 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     networks:
-      - backend_network
+      backend_network:
+        ipv4_address: 192.168.0.101
 
   flask:
     container_name: flask
@@ -37,9 +38,9 @@ services:
       context: .
       dockerfile: ./backend/flask_app/Dockerfile
     ports:
-      - 5001:5001
+      - 5000:5000
     expose:
-      - "5001"
+      - "5000"
     volumes:
       # - ./backend/flask_app/app:/usr/src/app:cached
       # - ./backend/flask_app:/usr/src/app:cached
@@ -52,7 +53,8 @@ services:
     working_dir: /var/www/scripts
     command: bash -c "./run.sh"
     networks:
-      - backend_network
+      backend_network:
+        ipv4_address: 192.168.0.102
     environment:
       # APP_ENV: "development"
       TZ: "Asia/Tokyo"
@@ -72,7 +74,8 @@ services:
       - ./backend/DB/docker-entrypoint:/docker-entrypoint-initdb.d
       - ./log/db:/var/log/mysql:cached
     networks:
-      - backend_network
+      backend_network:
+        ipv4_address: 192.168.0.103
     environment:
       # APP_ENV: "development"
       TZ: "Asia/Tokyo"
@@ -90,7 +93,8 @@ services:
     volumes:
       - ./phpmyadmin/sessions:/sessions
     networks:
-      - backend_network
+      backend_network:
+        ipv4_address: 192.168.0.104
 
   web:
     container_name: NginX
@@ -114,20 +118,22 @@ services:
       - flask
     restart: always
     networks:
-      - backend_network
+      backend_network:
+        ipv4_address: 192.168.0.105
 
 volumes:
   socket:
 
 networks:
-  # default:
-  #   external:
-  #     name: bridge
   backend_network:
-    name: backend_network
     driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 192.168.0.0/24
+         gateway: 192.168.0.1
     # external: true
-  front_network:
-    name: front_network
-    driver: bridge
+  # front_network:
+  #   name: front_network
+  #   driver: bridge
     # external: true

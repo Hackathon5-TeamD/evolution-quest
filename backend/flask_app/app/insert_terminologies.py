@@ -55,6 +55,6 @@ def insert_terminologie():
 
 if __name__ == "__main__":
     db.create_all()
-    insert_user()
-    insert_result()
+    # insert_user()
+    # insert_result()
     insert_terminologie()

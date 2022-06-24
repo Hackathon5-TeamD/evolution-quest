@@ -9,19 +9,21 @@ import { atom, useSetRecoilState } from "recoil";
 
 // バックエンドからのレスポンスの型定義
 type User = {
+  id: number;
   user_id: number;
   user_name: string;
   // joined_date: Date;
-  token: string;
+  // token: string;
 };
 
 // atomの初期値
 export const userLoginState = atom<User>({
   key: "userLoginState",
   default: {
+    id: 0,
     user_id: 0,
     user_name: "",
-    token: "",
+    // token: "",
   },
 });
 
@@ -56,9 +58,10 @@ export const Register: VFC = memo(() => {
   const postRegisterUser = async () => {
     try {
       // const result = await axios.post<User>("http://localhost:3001/user", {
-      const result = await axios.post<User>("http://flask:5001/user", {
+      // const result = await axios.post<User>("http://192.168.0.102:5000/user", {
+      const result = await axios.post<User>("http://127.0.0.1:5000/user/register", {
         user_name: userName,
-        joined_date: new Date(),
+        // joined_date: new Date(),
         password: password,
       });
       return result.data;
@@ -71,12 +74,13 @@ export const Register: VFC = memo(() => {
   const postLoginUser = async () => {
     try {
       // const result = await axios.post<User>("http://localhost:3001/user", {
-      const result = await axios.post<User>("http://flask:5001/user", {
+      // const result = await axios.post<User>("http://192.168.0.102:5000/user", {
+      const result = await axios.post<User>("http://127.0.0.1:5000/user/login", {
         user_name: userName,
         password: password,
         // 本来ならuser_nameとpasswordだけ送れば大丈夫
-        joined_date: new Date(),
-        token: "aaaaaaaa",
+        // joined_date: new Date(),
+        // token: "aaaaaaaa",
       });
       return result.data;
     } catch (err: any) {
@@ -97,7 +101,7 @@ export const Register: VFC = memo(() => {
               // atomの更新関数をここで読んで、Recoilでデータを保存
               setLogin(result);
               console.log(result);
-              localStorage.setItem("token", result.token);
+              // localStorage.setItem("token", result.token);
               navigate("/gamestart");
             })
             .catch((err) => console.log(err))
