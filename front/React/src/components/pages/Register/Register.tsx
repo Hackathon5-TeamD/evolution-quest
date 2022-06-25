@@ -4,7 +4,9 @@ import { Input, Button } from "semantic-ui-react";
 import { Title } from "../Login/Title/Title";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { atom, useSetRecoilState } from "recoil";
+import { atom, AtomEffect, useSetRecoilState } from "recoil";
+// グローバルステートの永続化　リロードされてもデータが消えないように。
+import { recoilPersist } from "recoil-persist";
 // サインアップとは、会員登録のこと。このページでは会員登録のロジックを書く。
 
 // バックエンドからのレスポンスの型定義
@@ -14,7 +16,14 @@ type User = {
   user_name: string;
   // joined_date: Date;
   token: string;
+  // effects_UNSTABLE: AtomEffect<any>[];
 };
+
+// recoil-persistを使用する。
+const { persistAtom } = recoilPersist({
+  key: "recoil-persist",
+  storage: localStorage,
+});
 
 // atomの初期値
 export const userLoginState = atom<User>({
@@ -25,6 +34,7 @@ export const userLoginState = atom<User>({
     user_name: "",
     token: "",
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const Register: VFC = memo(() => {
