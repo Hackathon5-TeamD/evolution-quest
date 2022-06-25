@@ -17,7 +17,8 @@ export const UserPage = () => {
   const data = useRecoilValue(userLoginState);
   // サーバーにユーザーデータ配列を取りに行く関数
   const fetch = async () => {
-    const res = await getUserRecord();
+    // ここで取得したいユーザーのidを関数へ渡す。useReciolValueのidを指定
+    const res = await getUserRecord(data.id);
     // サーバーから取ってきたユーザーデータ配列をページごとに違うstate(配列)に入れる
     setRecordArr(res);
   };
