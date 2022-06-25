@@ -6,6 +6,9 @@ from model import Result, db, app, Person
 
 import datetime
 
+# JST指定
+JST = datetime.timezone(datetime.timedelta(hours=+9))
+
 app.config['JSON_AS_ASCII'] = False
 
 result_module = Blueprint("result_module", __name__,url_prefix="/result")
@@ -26,7 +29,7 @@ def get_result():
         "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
-        "playd_at_date": datetime.datetime.fromtimestamp(i.playd_at_date)
+        "playd_at_date": datetime.datetime.fromtimestamp(i.playd_at_date, JST)
         }
         for i in results
     ]
@@ -42,7 +45,7 @@ def get_join_result():
         {
         "user_name" : i.user_name,
         "accuracy_value" : i.accuracy_value,
-        "playd_at_date": datetime.datetime.fromtimestamp(i.playd_at_date),
+        "playd_at_date": datetime.datetime.fromtimestamp(i.playd_at_date, JST),
         }
         for i in results
     ]
