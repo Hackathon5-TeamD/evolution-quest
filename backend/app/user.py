@@ -3,6 +3,7 @@ import os
 from flask import Blueprint, request , jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash 
+from flask_cors import cross_origin
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -29,7 +30,8 @@ def get_user():
     ]
     return jsonify(data) 
 #sign-upの機能
-@user_module.route('',methods=["POST"])
+@user_module.route("/register",methods=["POST"])
+@cross_origin(supports_credentials=True)
 def post_user():
     payload = request.json
     access_token = create_access_token(identity=payload.get("user_name"))
@@ -49,6 +51,7 @@ def post_user():
             )
 
 @user_module.route('/login',methods=["GET","POST"])
+@cross_origin(supports_credentials=True)
 def login_user():
     payload = request.json
     insert_data = Person(

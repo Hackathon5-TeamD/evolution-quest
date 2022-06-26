@@ -4,26 +4,26 @@ from unittest import result
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_cors import CORS
 app = Flask(__name__)
-# CORS(
-#     app,
-#     supports_credentials=True
-# )
-app = Flask(__name__)
+CORS(
+    app,
+    supports_credentials=True
+)
 base_dir = os.path.dirname(__file__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8'.format(
-    **{
-      'user': os.getenv('MYSQL_USER'),
-      'password': os.getenv('MYSQL_PASSWORD'),
-      'host': os.getenv('MYSQL_HOST'),
-      'port': os.getenv("MYSQL_PORT"),
-      'database': os.getenv('MYSQL_DATABASE'),
-    })
+# app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8'.format(
+#     **{
+#       'user': os.getenv('MYSQL_USER'),
+#       'password': os.getenv('MYSQL_PASSWORD'),
+#       'host': os.getenv('MYSQL_HOST'),
+#       'port': os.getenv("MYSQL_PORT"),
+#       'database': os.getenv('MYSQL_DATABASE'),
+#     })
   
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
-#     base_dir, "data.sqlite"
-# )
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    base_dir, "data.sqlite"
+)
 #jwtとの関係があるのかな？いらない？
 #session情報の暗号化？
 app.config['SECRET_KEY'] = os.urandom(24)
