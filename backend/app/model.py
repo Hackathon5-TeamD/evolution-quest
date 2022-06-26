@@ -3,19 +3,13 @@ import os
 from unittest import result
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
-# 使用していないと思われるため一旦コメントアウト
-# import pytz
-
 from flask_migrate import Migrate
-from flask_login import UserMixin, LoginManager
-
-
 app = Flask(__name__)
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-
+# CORS(
+#     app,
+#     supports_credentials=True
+# )
+app = Flask(__name__)
 base_dir = os.path.dirname(__file__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8'.format(
@@ -40,7 +34,7 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
-class Person(UserMixin, db.Model):
+class Person(db.Model):
     
     __tablename__ = "users"
 

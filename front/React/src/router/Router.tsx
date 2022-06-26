@@ -15,6 +15,7 @@ export const Router = () => {
         <Route path="/" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="gamestart" element={<GameStart />} />
+        {/* <Route path="/" element={<GameStart />} /> */}
         <Route path="userpage" element={<UserPage />} />
         <Route path="main" element={<MainPage />} />
         <Route path="result" element={<ResultPage />} />

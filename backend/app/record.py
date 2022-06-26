@@ -21,6 +21,7 @@ def get_my_result(user_id):
         
         my_data = [
             {
+                "user_name":i.users.user_name,
                 "user_id":i.user_id,
                 "accuracy_value":i.accuracy_value,
                 "wpm":i.wpm,

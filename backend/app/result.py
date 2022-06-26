@@ -1,18 +1,10 @@
 from flask import Blueprint, request, jsonify
 from model import Result, db, app, Person
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
+
 
 app.config['JSON_AS_ASCII'] = False
 
 result_module = Blueprint("result_module", __name__,url_prefix="/result")
-engine = create_engine('sqlite:///data.sqlite')  # data.sqliteというデータベースを使うという宣言です
-Base = declarative_base()  # データベースのテーブルの親です
-
-Base.metadata.create_all(engine)  # 実際にデータベースを構築します
-SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
-session = SessionMaker()  # 経路を実際に作成しました
 
 @result_module.route("")
 def get_result():
