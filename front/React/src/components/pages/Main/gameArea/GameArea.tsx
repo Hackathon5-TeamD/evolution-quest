@@ -13,6 +13,9 @@ type Props = {
   charsState: any;
 };
 
+const physicalKeyboardHighlight = true;
+const preventMouseDownDefault = true;
+
 export const GameArea = (props: Props) => {
   return (
     <div className={styles.gameArea}>
@@ -26,10 +29,8 @@ export const GameArea = (props: Props) => {
         charsState={props.charsState}
       />
       <Keyboard
-      // keyboardRef={(r) => (keyboard.current = r)}
-      // layoutName={layout}
-      // onChange={onChange}
-      // onKeyPress={onKeyPress}
+        physicalKeyboardHighlight={physicalKeyboardHighlight}
+        preventMouseDownDefault={preventMouseDownDefault}
       />
     </div>
   );
