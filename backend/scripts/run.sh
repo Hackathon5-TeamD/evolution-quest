@@ -23,4 +23,4 @@ echo "start app..."
 cd /usr/src/app && flask db init
 cd /usr/src/app && flask db migrate -m "db start"
 cd /usr/src/app && flask db upgrade
-cd /usr/src/app && python -m flask run --host=0.0.0.0
+cd /usr/src/app && python app.py --host=0.0.0.0
