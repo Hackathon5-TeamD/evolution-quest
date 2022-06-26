@@ -175,4 +175,6 @@ content-type: application/json
     "user_name": "にし",
     "password": "1"
 }
+###
+GET http://localhost:5000/terminologie2 HTTP/1.1
 

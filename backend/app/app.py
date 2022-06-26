@@ -3,6 +3,7 @@ from model import  app #, Person, db
 # # モジュールのインポート
 from main import main_module
 from user import user_module
+from terminologie2 import terminologie_module2, create_module, update_module, delete_module
 from terminologie import terminologie_module, create_module, update_module, delete_module
 from result import result_module
 from record import record_module
@@ -11,6 +12,7 @@ from record import record_module
 app.register_blueprint(main_module)
 app.register_blueprint(user_module)
 app.register_blueprint(terminologie_module)
+app.register_blueprint(terminologie_module2)
 app.register_blueprint(create_module)
 app.register_blueprint(update_module)
 app.register_blueprint(delete_module)

@@ -1,0 +1,26 @@
+# build用の設定
+FROM node:16.15.0-alpine3.15 AS builder
+
+# 使用するnodeのバージョンの指定
+ENV NODE_VERSION 16.15.0
+# docker内に入った時の初期パスの指定
+WORKDIR /app
+# ローカル側のファイルをdocker内にコピーする
+COPY ./front/React /app
+
+RUN npm install
+
+
+# 本番用の設定
+FROM nginx:1.21.6-alpine AS server
+
+COPY ./front/Nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN apk update \
+   && apk upgrade \
+   && apk add --no-cache openssl \
+   && apk add --no-cache certbot
+   
+COPY --from=builder ./app/build /usr/share/nginx/html
+
+EXPOSE 80

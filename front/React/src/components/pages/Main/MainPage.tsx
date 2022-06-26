@@ -8,6 +8,8 @@ import { useGame } from "../../../hooks/useGame";
 import { useState, useEffect } from "react";
 import { StartAlert } from "./StartAlert/StartAlert";
 import { postGameData } from "../../../api/postGameData";
+import { useRecoilValue } from "recoil";
+import { userLoginState } from "../Register/Register";
 
 export const MainPage = () => {
   // state
@@ -51,6 +53,8 @@ export const MainPage = () => {
   const sec = parseFloat((getDuration() / 1000).toFixed(2));
   let wpm = Math.floor((correctChar / sec) * 60);
 
+  // user_idをuserLoginStateから使用するためのvalue定義
+  const userId = useRecoilValue(userLoginState);
   //-------------------------  ゲーム終了時の処理  ----------------------------------
 
   // 文章を全て入力し終えたらゲームを終了させモーダルを表示、タイマーを停止
@@ -63,6 +67,7 @@ export const MainPage = () => {
       // accuracy, wpmをオブジェクトにしてaxiosでサーバーにpostする
       // user_idも後で付け足してね！
       const result = {
+        user_id: userId.user_id,
         accuracy: convertedAccuracy, // float
         wpm: wpm, // int
       };
