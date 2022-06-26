@@ -67,14 +67,14 @@ def login_user():
     user = Person.query.filter_by(user_name=insert_data.user_name).first()
     if check_password_hash(user.password, insert_data.password):
         username = db.session.query(Person).get("user_id")
-        # return {
-        #         "user_name":user.user_name
-        #        } 
-        access_token = create_access_token(identity=user.user_name)
-        return jsonify(access_token=access_token)
+        return {
+                "user_name":user.user_name
+               } 
+        # access_token = create_access_token(identity=user.user_name)
+        # return jsonify(access_token=access_token)
     else:
-        # return "nameかpass違うよ"
-        return jsonify({"msg": "ユーザー名かパスワードが違います"}), 401
+        return "nameかpass違うよ"
+        # return jsonify({"msg": "ユーザー名かパスワードが違います"}), 401
 
 # 以下JWTの仕組み
 @user_module.route("/token", methods=["POST"])

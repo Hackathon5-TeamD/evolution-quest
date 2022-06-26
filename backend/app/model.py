@@ -5,12 +5,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_migrate import Migrate
-from flask_login import UserMixin, LoginManager
+# from flask_login import UserMixin, LoginManager
 
 
 app = Flask(__name__)
-login_manager = LoginManager()
-login_manager.init_app(app)
+# login_manager = LoginManager()
+# login_manager.init_app(app)
 
 
 base_dir = os.path.dirname(__file__)
@@ -35,7 +35,8 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 # 以降各テーブル usersテーブルのクラス名はUserだとザックリしすぎなのでPersonとした
-class Person(UserMixin, db.Model):
+# 不使用のためUserMixin一旦削除
+class Person(db.Model):
     
     __tablename__ = "users"
 
