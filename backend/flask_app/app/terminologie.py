@@ -41,6 +41,7 @@ def term(terminologie_id):
     }
     ]
     return jsonify(data) 
+    # return "テスト" 
 
 # 用語の新規作成
 @create_module.route("/create", methods=["GET", "POST"])

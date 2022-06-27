@@ -16,9 +16,11 @@ services:
     working_dir: /front
     # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
     ports:
-      - 3000:3000
+      - "3000:3000"
     expose:
       - "3000"
+    links:
+      - flask
     # コンテナが勝手に終了しないための設定
     tty: true
     # 標準入出力とエラー出力をコンテナに結びつける設定
@@ -27,7 +29,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     networks:
-      backend_network:
+      my_network:
         ipv4_address: 192.168.0.101
 
   flask:
@@ -38,7 +40,7 @@ services:
       context: .
       dockerfile: ./backend/flask_app/Dockerfile
     ports:
-      - 5000:5000
+      - "5000:5000"
     expose:
       - "5000"
     volumes:
@@ -47,13 +49,13 @@ services:
       # - ./backend/DB:/usr/src/db:cached
       - ./backend/flask_app/scripts:/var/www/scripts:cached
       # - socket:/tmp
-      # - ./front/React/build:/var/www/public
-      - ./backend/flask_app/app:/var/www/
-      - ./gunicorn_socket:/tmp/gunicorn_socket
+      # - ./front/React/build:/var/www/templates
+      - ./backend/flask_app/app:/var/www
+      - ./gunicorn_socket:/tmp/gunicorn_socket/gunicorn_flask.sock
     working_dir: /var/www/scripts
     command: bash -c "./run.sh"
     networks:
-      backend_network:
+      my_network:
         ipv4_address: 192.168.0.102
     environment:
       # APP_ENV: "development"
@@ -74,7 +76,7 @@ services:
       - ./backend/DB/docker-entrypoint:/docker-entrypoint-initdb.d
       - ./log/db:/var/log/mysql:cached
     networks:
-      backend_network:
+      my_network:
         ipv4_address: 192.168.0.103
     environment:
       # APP_ENV: "development"
@@ -93,7 +95,7 @@ services:
     volumes:
       - ./phpmyadmin/sessions:/sessions
     networks:
-      backend_network:
+      my_network:
         ipv4_address: 192.168.0.104
 
   web:
@@ -110,30 +112,29 @@ services:
       # - socket:/tmp
       # - ./front/React/build:/usr/local/apache2/htdocs
       # - ./front/React/build:/etc/nginx/public
+      - ./front/React/build:/usr/share/nginx/html
       - ../ssl/certs/:/etc/pki/tls/certs/
       - ../ssl/private/:/etc/pki/tls/private/
-      - ./gunicorn_socket:/tmp/gunicorn_socket
+      - ./gunicorn_socket:/tmp/gunicorn_socket/gunicorn_flask.sock
       # - "/log/nginx_log:/var/log/nginx"
     depends_on:
       - flask
+    links:
+      - flask
     restart: always
     networks:
-      backend_network:
+      my_network:
         ipv4_address: 192.168.0.105
 
 volumes:
   socket:
 
 networks:
-  backend_network:
+  my_network:
     driver: bridge
     ipam:
      driver: default
      config:
        - subnet: 192.168.0.0/24
-         gateway: 192.168.0.1
-    # external: true
-  # front_network:
-  #   name: front_network
-  #   driver: bridge
+        #  gateway: 192.168.0.1
     # external: true

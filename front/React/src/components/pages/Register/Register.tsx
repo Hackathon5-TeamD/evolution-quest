@@ -57,8 +57,8 @@ export const Register: VFC = memo(() => {
 
   const postRegisterUser = async () => {
     try {
-      // const result = await axios.post<User>("http://localhost:3001/user", {
-      // const result = await axios.post<User>("http://192.168.0.102:5000/user", {
+      // const result = await axios.post<User>("http://localhost:3001/user/register", {
+      // const result = await axios.post<User>("http://192.168.0.102:5000/user/register", {
       const result = await axios.post<User>("http://127.0.0.1:5000/user/register", {
         user_name: userName,
         // joined_date: new Date(),
@@ -73,8 +73,8 @@ export const Register: VFC = memo(() => {
   // URLに本番には/user/login /user/registerを必ず入れること。
   const postLoginUser = async () => {
     try {
-      // const result = await axios.post<User>("http://localhost:3001/user", {
-      // const result = await axios.post<User>("http://192.168.0.102:5000/user", {
+      // const result = await axios.post<User>("http://localhost:3001/user/login", {
+      // const result = await axios.post<User>("http://192.168.0.102:5000/user/login", {
       const result = await axios.post<User>("http://127.0.0.1:5000/user/login", {
         user_name: userName,
         password: password,

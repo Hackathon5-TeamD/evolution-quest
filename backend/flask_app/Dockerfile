@@ -14,7 +14,7 @@ COPY ./backend/flask_app/app .
 COPY ./backend/flask_app/scripts ./scripts
 # COPY ./front/React/build ./public
 
-ENV FLASK_APP=app:app
+ENV FLASK_APP=model:app
 
 COPY ./backend/flask_app/requirements.txt .
 

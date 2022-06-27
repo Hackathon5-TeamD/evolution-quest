@@ -1,6 +1,6 @@
 import csv
 
-from data.sampledata import sampleusers, sampleresults
+# from data.sampledata import sampleusers, sampleresults
 from model import Terminologie, Person, Result, db
 
 # DBの初期化,各テーブルの初期データを挿入する

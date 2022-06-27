@@ -8,11 +8,22 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 # from flask_jwt_extended import jwt_required
 # from flask_jwt_extended import JWTManager
 
+from flask_cors import cross_origin
+
+
 # app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
 # jwt = JWTManager(app)
 app.config["JSON_AS_ASCII"] = False
 
 user_module = Blueprint("user_module", __name__, url_prefix="/user")
+
+# # すべてのリクエストに対してヘッダーをつけていく
+# @app.after_request
+# def after_request(response):
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     response.headers.add("Access-Control-Allow-Headers", "*")
+#     response.headers.add("Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS")
+#     return response
 
 # User全てをJSONで取得
 @user_module.route("")
@@ -29,6 +40,7 @@ def get_user():
     return jsonify(data) 
 #sign-upの機能
 @user_module.route("/register",methods=["POST"])
+@cross_origin(supports_credentials=True)
 def post_user():
     payload = request.json
     # access_token = create_access_token(identity=payload.get("user_name"))
@@ -50,6 +62,7 @@ def post_user():
             )
 
 @user_module.route('/login',methods=["GET","POST"])
+@cross_origin(supports_credentials=True)
 def login_user():
     payload = request.json
     insert_data = Person(
