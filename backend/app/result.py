@@ -6,20 +6,20 @@ app.config['JSON_AS_ASCII'] = False
 
 result_module = Blueprint("result_module", __name__,url_prefix="/result")
 
-@result_module.route("")
-def get_result():
-    results = Result.query.all()
-    data = [
-        {
-        "result_id" :i.result_id,
-        "user_id" : i.user_id,
-        "accuracy_value" : i.accuracy_value,
-        "wpm" : i.wpm,
-        "played_at_date": i.played_at_date,
-        }
-        for i in results
-    ]
-    return jsonify(data) 
+# @result_module.route("")
+# def get_result():
+#     results = Result.query.all()
+#     data = [
+#         {
+#         "result_id" :i.result_id,
+#         "user_id" : i.user_id,
+#         "accuracy_value" : i.accuracy_value,
+#         "wpm" : i.wpm,
+#         "played_at_date": i.played_at_date,
+#         }
+#         for i in results
+#     ]
+#     return jsonify(data) 
 
 
 #ランキング1~10まで出力
@@ -56,7 +56,7 @@ def get_join_result2():
 def post_result():
     payload = request.json
     insert_data = Result(
-        result_id = payload.get("result_id"),
+        # result_id = payload.get("result_id"),
         user_id = payload.get("user_id"),
         accuracy_value = payload.get("accuracy_value"),
         wpm =payload.get("wpm"),

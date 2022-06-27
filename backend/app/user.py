@@ -36,7 +36,7 @@ def post_user():
     payload = request.json
     access_token = create_access_token(identity=payload.get("user_name"))
     insert_data = Person(
-        user_id = payload.get("user_id"),
+        # user_id = payload.get("user_id"),
         user_name = payload.get("user_name"),
         password = generate_password_hash(payload.get("password"))
         )
