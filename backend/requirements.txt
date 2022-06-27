@@ -24,3 +24,4 @@ zipp==3.8.0
 PyMySQL
 flask-jwt-extended
 flask_cors
+gunicorn==20.1.0

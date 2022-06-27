@@ -50,7 +50,7 @@ def post_user():
             password = payload.get("password")
             )
 
-@user_module.route('/login',methods=["GET","POST"])
+@user_module.route('/login',methods=["GET","POST"],strict_slashes=False)
 @cross_origin(supports_credentials=True)
 def login_user():
     payload = request.json
