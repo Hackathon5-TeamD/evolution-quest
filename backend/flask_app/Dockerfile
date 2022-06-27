@@ -12,7 +12,6 @@ WORKDIR /var/www
 
 COPY ./backend/flask_app/app .
 COPY ./backend/flask_app/scripts ./scripts
-# COPY ./front/React/build ./public
 
 ENV FLASK_APP=model:app
 
@@ -21,7 +20,6 @@ COPY ./backend/flask_app/requirements.txt .
 RUN pip install --upgrade pip \
     && pip install --trusted-host pypi.python.org -r requirements.txt
 
-# COPY ./app /usr/src
   
 # CMD [ "uwsgi", "--ini", "/usr/src/app/app/uwsgi.ini" ]
 # CMD ["gunicorn", "app:app", "--config", "/var/www/gunicorn.py" ]

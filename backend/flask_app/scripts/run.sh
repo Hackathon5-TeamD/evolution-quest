@@ -26,5 +26,5 @@ cd /var/www && python -m flask db upgrade
 
 # cd /usr/local/bin/uwsgi && uwsgi --ini /usr/src/app/app/uwsgi.ini
 
-# cd /var/www && gunicorn model:app --config /var/www/WSGI/gunicorn.py
+# cd /var/www && gunicorn model:app --config /var/www/gunicorn.py
 cd /var/www && python app.py

@@ -2,35 +2,6 @@
 version: "3.9"
 
 services:
-  front:
-    # 作成するdockerコンテナの名前
-    container_name: front
-    build:
-      context: .
-      # buildするdockerfileの位置
-      # 本番用
-      dockerfile: ./front/Dockerfile.prod
-    # docker内に入った時の初期パスの指定
-    working_dir: /app
-    # docker内と共有するフォルダの指定
-    volumes:
-      - ./front/React:/app
-      - ./gunicorn_socket:/tmp/gunicorn_socket
-      # - ./front/React/src:/app/src
-      - ssl:/etc/letsencrypt
-    # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
-    ports:
-      - "80:80"
-    # コンテナが勝手に終了しないための設定
-    tty: true
-    # 標準入出力とエラー出力をコンテナに結びつける設定
-    stdin_open: true
-    # ホットリロードを行う設定
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    networks:
-      - my_network
-
   flask:
     container_name: flask
     depends_on:
@@ -39,19 +10,18 @@ services:
       context: .
       dockerfile: ./backend/flask_app/Dockerfile
     ports:
-      - 5001:5001
+      - "5000:5000"
     expose:
-      - "5001"
+      - "5000"
     volumes:
-      - ./backend/flask_app/app:/var/www/
-      - ./backend/flask_app/scripts:/var/www/scripts
-      - ./gunicorn_socket:/tmp/gunicorn_socket
+      - ./backend/flask_app/scripts:/var/www/scripts:cached
+      - ./backend/flask_app/app:/var/www
+      - ./gunicorn_socket:/tmp/gunicorn_socket/gunicorn_flask.sock
     working_dir: /var/www/scripts
     command: bash -c "./run.sh"
     networks:
       - my_network
     environment:
-      # APP_ENV: "development"
       TZ: "Asia/Tokyo"
     env_file:
       - .env.dev
@@ -71,7 +41,6 @@ services:
     networks:
       - my_network
     environment:
-      # APP_ENV: "development"
       TZ: "Asia/Tokyo"
     env_file:
       - .env.dev
@@ -88,16 +57,28 @@ services:
       - ./phpmyadmin/sessions:/sessions
     networks:
       - my_network
-
+    
+  web:
+    container_name: NginX
+    image: nginx:latest
+    command: nginx -g "daemon off;"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./front/React/build:/usr/share/nginx/html
+      - ../ssl/certs/:/etc/pki/tls/certs/
+      - ../ssl/private/:/etc/pki/tls/private/
+      - ./gunicorn_socket:/tmp/gunicorn_socket/gunicorn_flask.sock
+    links:
+      - flask
+    restart: always
+    networks:
+      - my_network
+    
 volumes:
   socket:
-  ssl:
 
 networks:
-  # default:
-  #   external:
-  #     name: bridge
   my_network:
-    name: my_network
     driver: bridge
-    # external: true

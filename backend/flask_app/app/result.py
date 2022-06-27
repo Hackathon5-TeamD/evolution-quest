@@ -54,7 +54,7 @@ def get_join_result2():
 def post_result():
     payload = request.json
     insert_data = Result(
-        result_id = payload.get("result_id"),
+        # result_id = payload.get("result_id"),
         user_id = payload.get("user_id"),
         accuracy_value = payload.get("accuracy_value"),
         wpm =payload.get("wpm"),

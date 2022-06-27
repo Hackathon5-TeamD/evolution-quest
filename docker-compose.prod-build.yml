@@ -2,22 +2,19 @@
 version: "3.9"
 
 services:
-  front:
+  node:
+    # buildするdockerfileの位置
+    build: ./front
     # 作成するdockerコンテナの名前
-    container_name: front
-    build:
-      context: .
-      # buildするdockerfileの位置
-      dockerfile: ./front/Dockerfile.prod-build
-    # docker内に入った時の初期パスの指定
-    working_dir: /app
-    # docker内と共有するフォルダの指定
-    volumes:
-      - ./front/React:/app
-      - ssl:/etc/letsencrypt
+    container_name: node
     # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
+    working_dir: /front    
+    volumes:
+      - ./front/React:/front    
     ports:
-      - "80:80"
+      - "3000:3000"
+    expose:
+      - "3000"
     # コンテナが勝手に終了しないための設定
     tty: true
     # 標準入出力とエラー出力をコンテナに結びつける設定
@@ -26,17 +23,16 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     networks:
-      - my_network
+      my_network:
+        ipv4_address: 192.168.0.101
 
 volumes:
   socket:
-  ssl:
 
 networks:
-  # default:
-  #   external:
-  #     name: bridge
   my_network:
-    name: my_network
     driver: bridge
-    # external: true
+    ipam:
+     driver: default
+     config:
+       - subnet: 192.168.0.0/24
