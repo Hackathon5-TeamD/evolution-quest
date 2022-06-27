@@ -6,8 +6,9 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 # from flask_login import UserMixin, login_user
 from sqlalchemy.orm import sessionmaker
 
-from sqlalchemy import create_engine, Column, String, Integer
-from sqlalchemy.ext.declarative import declarative_base
+# 使用していないと思われるのでコメントアウト
+# from sqlalchemy import create_engine, Column, String, Integer
+# from sqlalchemy.ext.declarative import declarative_base
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -17,12 +18,13 @@ from flask_jwt_extended import JWTManager
 app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
 jwt = JWTManager(app)
 
-engine = create_engine('sqlite:///data.sqlite')  # data.sqliteというデータベースを使うという宣言です
-Base = declarative_base()  # データベースのテーブルの親です
+# 使用していないと思われるのでコメントアウト
+# engine = create_engine('sqlite:///data.sqlite')  # data.sqliteというデータベースを使うという宣言です
+# Base = declarative_base()  # データベースのテーブルの親です
 
-Base.metadata.create_all(engine)  # 実際にデータベースを構築します
-SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
-session = SessionMaker()  # 経路を実際に作成しました
+# Base.metadata.create_all(engine)  # 実際にデータベースを構築します
+# SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
+# session = SessionMaker()  # 経路を実際に作成しました
  
 
 app.config["JSON_AS_ASCII"] = False
@@ -66,12 +68,15 @@ def login_user():
     
     user = Person.query.filter_by(user_name=insert_data.user_name).first()
     if check_password_hash(user.password, insert_data.password):
-        username = session.query(Person).get("user_id")
-        return {
-                "user_name":user.user_name
-               }        
+        username = db.session.query(Person).get("user_id")
+        # return {
+        #         "user_name":user.user_name
+        #        }
+        access_token = create_access_token(identity=user.user_name)
+        return jsonify(access_token=access_token)
     else:
-        return "nameかpass違うよ"
+        # return "nameかpass違うよ"
+        return jsonify({"msg": "ユーザー名かパスワードが違います"}), 401
 
 
 # 以下JWTの仕組み
