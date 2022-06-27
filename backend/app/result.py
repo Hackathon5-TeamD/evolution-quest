@@ -15,7 +15,7 @@ def get_result():
         "user_id" : i.user_id,
         "accuracy_value" : i.accuracy_value,
         "wpm" : i.wpm,
-        "playd_at_date": i.playd_at_date,
+        "played_at_date": i.played_at_date,
         }
         for i in results
     ]
@@ -60,7 +60,7 @@ def post_result():
         user_id = payload.get("user_id"),
         accuracy_value = payload.get("accuracy_value"),
         wpm =payload.get("wpm"),
-        playd_at_date=payload.get("playd_at_date"),
+        played_at_date=payload.get("played_at_date"),
     )
     db.session.add(insert_data)
     db.session.commit()

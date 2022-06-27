@@ -1,8 +1,8 @@
 """db start
 
-Revision ID: c2ef95d563ed
+Revision ID: 3162dc5995d6
 Revises: 
-Create Date: 2022-06-26 15:09:35.729151
+Create Date: 2022-06-27 14:03:52.669211
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c2ef95d563ed'
+revision = '3162dc5995d6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('accuracy_value', sa.Float(), nullable=True),
     sa.Column('wpm', sa.Float(), nullable=True),
-    sa.Column('playd_at_date', sa.Integer(), nullable=True),
+    sa.Column('played_at_date', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.user_id'], ),
     sa.PrimaryKeyConstraint('result_id')
     )
