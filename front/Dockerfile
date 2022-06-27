@@ -8,7 +8,6 @@ ENV NODE_VERSION 16.15.0
 WORKDIR /front
 # ローカル側のファイルをdocker内にコピーする
 COPY ./React /front
-# COPY ./scripts /front
 # コンテナの使用ポート指定
 EXPOSE 3000
 # コンテナが勝手に終了してしまわないようにする設定

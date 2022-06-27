@@ -1,8 +1,4 @@
 /log
-/venv
-/.vscode
 
 # CloudFrormation変数ファイル
 /dev.cfg
-/clear.sh
-/data.sqlite

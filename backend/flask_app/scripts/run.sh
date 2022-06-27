@@ -18,9 +18,13 @@ done
 # cd /usr/src/app && gunicorn app.app:app -w 4 -k 0.0.0.0:8000
 
 echo "insert data..."
-cd /usr/src/app && python insert_terminologies.py
+cd /var/www && python insert_terminologies.py
 echo "start app..."
-cd /usr/src/app && flask db init
-cd /usr/src/app && flask db migrate -m "db start"
-cd /usr/src/app && flask db upgrade
-cd /usr/src/app && python app.py --host=0.0.0.0
+cd /var/www && python -m flask db init
+cd /var/www && python -m flask db migrate -m "db start"
+cd /var/www && python -m flask db upgrade
+
+# cd /usr/local/bin/uwsgi && uwsgi --ini /usr/src/app/app/uwsgi.ini
+
+# cd /var/www && gunicorn model:app --config /var/www/gunicorn.py
+cd /var/www && python app.py

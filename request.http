@@ -3,29 +3,9 @@ content-type: application/json
 
 { 
     "user_id" : 1,
-    "accuracy_value" : 198.2130,
-    "wpm" : 150,
-    "playd_at_date" :1656182595
-}
-###
-POST http://localhost:5000/result HTTP/1.1
-content-type: application/json
-
-{ 
-    "user_id" : 1,
-    "accuracy_value" : 200,
-    "wpm" : 140,
-    "playd_at_date" :1655282595
-}
-###
-POST http://localhost:5000/result HTTP/1.1
-content-type: application/json
-
-{ 
-    "user_id" : 1,
     "accuracy_value" : 98.2,
     "wpm" : 100.9,
-    "playd_at_date" :1655782595
+    "played_at_date" :"2022-6-10"
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
@@ -33,9 +13,9 @@ content-type: application/json
 
 { 
     "user_id" : 2,
-    "accuracy_value" : 197.4,
+    "accuracy_value" : 97.4,
     "wpm" : 117.2,
-    "playd_at_date" :1657882595
+    "played_at_date" :"2022-6-11"
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
@@ -45,52 +25,24 @@ content-type: application/json
     "user_id" : 3,
     "accuracy_value" : 96.3,
     "wpm" : 105.3,
-    "playd_at_date" : 1655982595
-}    
-###
-POST http://localhost:5000/result HTTP/1.1
-content-type: application/json
-
-{ 
-    "user_id" : 5,
-    "accuracy_value" : 96.3,
-    "wpm" : 105.3,
-    "playd_at_date" : 1655582595
+    "played_at_date" : "2022-6-12-12-34-56-1230"
 }
 ###
 POST http://localhost:5000/result HTTP/1.1
 content-type: application/json
 
 { 
-    "user_id" : 5,
-    "accuracy_value" : 98.3,
-    "wpm" : 120.3,
-    "playd_at_date" : 1655482595
-}
-###
-POST http://localhost:5000/result HTTP/1.1
-content-type: application/json
-
-{ 
-    "user_id" : 6,
-    "accuracy_value" : 210,
-    "wpm" : 210,
-    "playd_at_date" : 1660482595
+    "user_id" : 4,
+    "accuracy_value" : 94.3,
+    "wpm" : 100.3,
+    "played_at_date" : "2022-6-13-12-34-56-1230"
 }
 
 ###
 
 GET http://localhost:5000/result HTTP/1.1
 ###
-# GET http://localhost:5000/result/user/ HTTP/1.1
-###
-POST http://localhost:5000/record/1 HTTP/1.1
-content-type: application/json
-
-{
-    "user_id":1
-}
-
+GET http://localhost:5000/result/user HTTP/1.1
 
 ###
 GET http://localhost:5000/result/1 HTTP/1.1
@@ -100,12 +52,12 @@ GET http://localhost:5000/result/2 HTTP/1.1
 
 
 ###
-POST http://localhost:5000/user/register HTTP/1.1
+POST http://localhost:5000/user HTTP/1.1
 content-type: application/json
 
 {
-    "user_name": "D-imamura",
-    "password": "111"
+    "user_name": "にし",
+    "password": "1"
 }
 ###
 POST http://localhost:5000/user HTTP/1.1
@@ -163,4 +115,3 @@ content-type: application/json
     "user_name": "今村 優月",
     "password": "test4"
 }
-
