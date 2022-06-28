@@ -1,6 +1,10 @@
 from flask import Blueprint, request, jsonify
 from model import Result, app
 
+import datetime
+
+JST = datetime.timezone(datetime.timedelta(hours=+9))
+
 app.config['JSON_AS_ASCII'] = False
 
 record_module = Blueprint("record_module", __name__,url_prefix="/record")
@@ -24,7 +28,7 @@ def get_my_result(user_id):
                 "user_id":i.user_id,
                 "accuracy_value":i.accuracy_value,
                 "wpm":i.wpm,
-                "playd_at_date":i.playd_at_date
+                "playd_at_date": datetime.datetime.fromtimestamp(i.playd_at_date, JST)
             }
             for i in users
         ]

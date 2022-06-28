@@ -4,7 +4,7 @@ from flask import Blueprint, request , jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash 
 # from flask_login import UserMixin, login_user
-from sqlalchemy.orm import sessionmaker
+# from sqlalchemy.orm import sessionmaker
 
 # 使用していないと思われるのでコメントアウト
 # from sqlalchemy import create_engine, Column, String, Integer
@@ -77,7 +77,6 @@ def login_user():
     else:
         # return "nameかpass違うよ"
         return jsonify({"msg": "ユーザー名かパスワードが違います"}), 401
-
 
 # 以下JWTの仕組み
 @user_module.route("/token", methods=["POST"])
