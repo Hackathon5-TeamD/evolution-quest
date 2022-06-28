@@ -66,14 +66,12 @@ export const MainPage = () => {
       const convertedAccuracy = parseFloat(accuracy.toFixed(1));
       // accuracy, wpmをオブジェクトにしてaxiosでサーバーにpostする
       // user_idも後で付け足してね！
-      // サインイン情報のuser_idを使用
       const result = {
-        user_id: userId.id,
+        user_id: userId.user_id,
         accuracy: convertedAccuracy, // float
         wpm: wpm, // int
       };
       postGameData(result);
-      console.log(result);
     }
   }, [phase]);
 

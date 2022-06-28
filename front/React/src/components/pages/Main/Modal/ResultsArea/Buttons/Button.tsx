@@ -33,7 +33,7 @@ export const Button = (props: Props) => {
 
   // finishボタンを押した時の処理
   const finishGame = () => {
-    navigation("/userpage");
+    navigation("/");
   };
 
   // 一度だけEvent listenerを設定

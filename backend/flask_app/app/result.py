@@ -71,7 +71,7 @@ def get_join_result2():
 
 #ゲームの結果を登録
 @result_module.route("",methods=["POST"])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def post_result():
     payload = request.json
     insert_data = Result(

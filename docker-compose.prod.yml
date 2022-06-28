@@ -67,6 +67,7 @@ services:
       - "443:443"
     volumes:
       - ./front/React/build:/usr/share/nginx/html
+      - ./web/conf:/etc/nginx/conf.d
       - ../ssl/certs/:/etc/pki/tls/certs/
       - ../ssl/private/:/etc/pki/tls/private/
       - ./gunicorn_socket:/tmp/gunicorn_socket/gunicorn_flask.sock
