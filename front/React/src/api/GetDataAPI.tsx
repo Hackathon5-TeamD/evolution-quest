@@ -1,5 +1,6 @@
 import axios from "axios";
-const Url = `http://localhost:3001`;
+// const Url = `http://localhost:3001`;
+const Url = `http://localhost:5000`;
 
 export const getRanking = async (page: number) => {
   try {
