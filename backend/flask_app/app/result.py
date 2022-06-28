@@ -4,7 +4,6 @@ from model import Result, db, app, Person
 # from sqlalchemy import create_engine
 # from sqlalchemy.ext.declarative import declarative_base
 from flask_cors import cross_origin
-
 import datetime
 
 # JST指定
@@ -13,30 +12,6 @@ JST = datetime.timezone(datetime.timedelta(hours=+9))
 app.config['JSON_AS_ASCII'] = False
 
 result_module = Blueprint("result_module", __name__,url_prefix="/result")
-
-# engine = create_engine('sqlite:///data.sqlite')  # data.sqliteというデータベースを使うという宣言です
-# Base = declarative_base()  # データベースのテーブルの親です
-
-# Base.metadata.create_all(engine)  # 実際にデータベースを構築します
-# SessionMaker = sessionmaker(bind=engine)  # Pythonとデータベースの経路です
-# session = SessionMaker()  # 経路を実際に作成しました
-
-
-# @result_module.route("")
-# @cross_origin(supports_credentials=True)
-# def get_result():
-#     results = Result.query.all()
-#     data = [
-#         {
-#         "result_id" :i.result_id,
-#         "user_id" : i.user_id,
-#         "accuracy_value" : i.accuracy_value,
-#         "wpm" : i.wpm,
-#         "played_at_date": i.played_at_date,
-#         }
-#         for i in results
-#     ]
-#     return jsonify(data) 
 
 #ランキング1~10まで出力
 

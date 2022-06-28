@@ -1,6 +1,6 @@
 from atexit import register
 import os
-from flask import Blueprint, request , jsonify,render_template
+from flask import Blueprint, request , jsonify
 from model import Person, db, app
 from flask_bcrypt import generate_password_hash, check_password_hash 
 # from flask_jwt_extended import create_access_token
@@ -9,7 +9,6 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 # from flask_jwt_extended import JWTManager
 
 from flask_cors import cross_origin
-
 
 # app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
 # jwt = JWTManager(app)
@@ -46,10 +45,8 @@ def post_user():
     # access_token = create_access_token(identity=payload.get("user_name"))
     
     insert_data = Person(
-        # user_id = payload.get("user_id"),
         user_name = payload.get("user_name"),
         password = generate_password_hash(payload.get("password")),
-        # token = access_token
         )
     db.session.add(insert_data)
     db.session.commit()
