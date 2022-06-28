@@ -14,7 +14,7 @@ type User = {
   user_id: number;
   user_name: string;
   // joined_date: Date;
-  token: string;
+  // token: string;
 };
 
 export const Login: VFC = memo(() => {
@@ -40,11 +40,13 @@ export const Login: VFC = memo(() => {
   // URLに本番には/user/login /user/registerを必ず入れること。
   const postLoginUser = async () => {
     try {
-      const result = await axios.post<User>("http://localhost:3001/user", {
+      // const result = await axios.post<User>("http://localhost:3001/user", {
+      // const result = await axios.post<User>("http://127.0.0.1:5000/user/login", {
+      const result = await axios.post<User>("http://localhost:5000/user/login", {
         user_name: userName,
         password: password,
         // 本来ならuser_nameとpasswordだけ送れば大丈夫
-        token: "aaaaaaaa",
+        // token: "aaaaaaaa",
       });
       return result.data;
     } catch (err: any) {
@@ -64,7 +66,7 @@ export const Login: VFC = memo(() => {
           // atomの更新関数でデータを保存
           setLogin(result);
           console.log(result);
-          localStorage.setItem("token", result.token);
+          // localStorage.setItem("token", result.token);
           navigate("/gamestart");
         })
         .catch((err) => console.log(err))
