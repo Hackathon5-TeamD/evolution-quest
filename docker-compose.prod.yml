@@ -2,34 +2,6 @@
 version: "3.9"
 
 services:
-  node:
-    # buildするdockerfileの位置
-    build: ./front
-    # 作成するdockerコンテナの名前
-    container_name: node
-    # docker内と共有するフォルダの指定
-    volumes:
-      - ./front/React:/front
-    # docker内に入った時の初期パスの指定
-    working_dir: /front
-    # コンテナにバインドするポートの指定（左:自分のPCポート、右:dookerコンテナのポート）
-    ports:
-      - "3000:3000"
-    expose:
-      - "3000"
-    links:
-      - flask
-    # コンテナが勝手に終了しないための設定
-    tty: true
-    # 標準入出力とエラー出力をコンテナに結びつける設定
-    stdin_open: true
-    # ホットリロードを行う設定
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    networks:
-      my_network:
-        ipv4_address: 192.168.0.101
-
   flask:
     container_name: flask
     depends_on:
@@ -48,8 +20,7 @@ services:
     working_dir: /var/www/scripts
     command: bash -c "./run.sh"
     networks:
-      my_network:
-        ipv4_address: 192.168.0.102
+      - my_network
     environment:
       TZ: "Asia/Tokyo"
     env_file:
@@ -68,8 +39,7 @@ services:
       - ./backend/DB/docker-entrypoint:/docker-entrypoint-initdb.d
       - ./log/db:/var/log/mysql:cached
     networks:
-      my_network:
-        ipv4_address: 192.168.0.103
+      - my_network
     environment:
       TZ: "Asia/Tokyo"
     env_file:
@@ -86,9 +56,8 @@ services:
     volumes:
       - ./phpmyadmin/sessions:/sessions
     networks:
-      my_network:
-        ipv4_address: 192.168.0.104
-
+      - my_network
+    
   web:
     container_name: NginX
     image: nginx:latest
@@ -98,6 +67,7 @@ services:
       - "443:443"
     volumes:
       - ./front/React/build:/usr/share/nginx/html
+      - ./web/conf:/etc/nginx/conf.d
       - ../ssl/certs/:/etc/pki/tls/certs/
       - ../ssl/private/:/etc/pki/tls/private/
       - ./gunicorn_socket:/tmp/gunicorn_socket/gunicorn_flask.sock
@@ -105,16 +75,11 @@ services:
       - flask
     restart: always
     networks:
-      my_network:
-        ipv4_address: 192.168.0.105
-
+      - my_network
+    
 volumes:
   socket:
 
 networks:
   my_network:
     driver: bridge
-    ipam:
-     driver: default
-     config:
-       - subnet: 192.168.0.0/24

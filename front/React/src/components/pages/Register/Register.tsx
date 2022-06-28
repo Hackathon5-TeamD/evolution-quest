@@ -4,9 +4,7 @@ import { Input, Button } from "semantic-ui-react";
 import { Title } from "../Login/Title/Title";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { atom, AtomEffect, useSetRecoilState } from "recoil";
-// グローバルステートの永続化　リロードされてもデータが消えないように。
-import { recoilPersist } from "recoil-persist";
+import { atom, useSetRecoilState } from "recoil";
 // サインアップとは、会員登録のこと。このページでは会員登録のロジックを書く。
 
 // バックエンドからのレスポンスの型定義
@@ -15,15 +13,8 @@ type User = {
   user_id: number;
   user_name: string;
   // joined_date: Date;
-  token: string;
-  // effects_UNSTABLE: AtomEffect<any>[];
+  // token: string;
 };
-
-// recoil-persistを使用する。
-const { persistAtom } = recoilPersist({
-  key: "recoil-persist",
-  storage: localStorage,
-});
 
 // atomの初期値
 export const userLoginState = atom<User>({
@@ -32,9 +23,8 @@ export const userLoginState = atom<User>({
     id: 0,
     user_id: 0,
     user_name: "",
-    token: "",
+    // token: "",
   },
-  effects_UNSTABLE: [persistAtom],
 });
 
 export const Register: VFC = memo(() => {
@@ -67,9 +57,12 @@ export const Register: VFC = memo(() => {
 
   const postRegisterUser = async () => {
     try {
-      const result = await axios.post<User>("http://localhost:3001/user", {
+      // const result = await axios.post<User>("http://localhost:3001/user/register", {
+      // const result = await axios.post<User>("http://192.168.0.102:5000/user/register", {
+      // const result = await axios.post<User>("http://127.0.0.1:5000/user/register", {
+      const result = await axios.post<User>("http://localhost:5000/user/register", {
         user_name: userName,
-        joined_date: new Date(),
+        // joined_date: new Date(),
         password: password,
       });
       return result.data;
@@ -81,12 +74,15 @@ export const Register: VFC = memo(() => {
   // URLに本番には/user/login /user/registerを必ず入れること。
   const postLoginUser = async () => {
     try {
-      const result = await axios.post<User>("http://localhost:3001/user", {
+      // const result = await axios.post<User>("http://localhost:3001/user/login", {
+      // const result = await axios.post<User>("http://192.168.0.102:5000/user/login", {
+      // const result = await axios.post<User>("http://127.0.0.1:5000/user/login", {
+      const result = await axios.post<User>("http://localhost:5000/user/login", {
         user_name: userName,
         password: password,
         // 本来ならuser_nameとpasswordだけ送れば大丈夫
-        joined_date: new Date(),
-        token: "aaaaaaaa",
+        // joined_date: new Date(),
+        // token: "aaaaaaaa",
       });
       return result.data;
     } catch (err: any) {
@@ -107,7 +103,7 @@ export const Register: VFC = memo(() => {
               // atomの更新関数をここで読んで、Recoilでデータを保存
               setLogin(result);
               console.log(result);
-              localStorage.setItem("token", result.token);
+              // localStorage.setItem("token", result.token);
               navigate("/gamestart");
             })
             .catch((err) => console.log(err))
